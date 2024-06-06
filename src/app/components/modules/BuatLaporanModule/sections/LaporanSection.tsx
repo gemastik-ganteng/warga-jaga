@@ -1,5 +1,10 @@
+import SubmitLaporanElement from "../element/SubmitLaporanElement"
+
 const LaporanSection = ()=> {
-    return <div></div>
+    return <div>
+
+        <SubmitLaporanElement/>
+    </div>
 }
 
 export default LaporanSection
