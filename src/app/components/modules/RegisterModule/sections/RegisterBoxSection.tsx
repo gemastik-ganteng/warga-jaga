@@ -20,10 +20,8 @@ const RegisterBoxSection = ()=> {
     return <div className="flex w-full flex-col space-y-4 text-black mt-4 px-8">
 
         <div className="flex flex-col w-full text-sm">
-            <Stack>
             <input placeholder="Nama Lengkap (Sesuai KTP)" value={nama}
-            onChange={(e)=> setNama(e.currentTarget.value)} className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md"/>
-            </Stack>
+            onChange={(e)=> setNama(e.currentTarget.value)} className="w-full text-black border-2 pr-4 pl-4 py-3 border-blue-400 rounded-md"/>
         </div>
         <div className="flex flex-col w-full text-sm">
         <Stack>
