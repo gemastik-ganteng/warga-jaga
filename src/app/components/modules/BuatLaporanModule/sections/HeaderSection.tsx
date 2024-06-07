@@ -1,14 +1,20 @@
+"use client"
+import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa"
 
 const HeaderSection = ()=> {
-    return <div className="grid grid-cols-3  w-full  text-black ">
-        <div className="flex w-full  h-full">
-        <FaArrowLeft className="my-auto"/>
+    const router = useRouter();
+    const navigateBack = ()=> {
+        router.back()
+    }
+    return <div className="flex  w-full  text-black overflow-x-hidden ">
+        <div className="flex w-8">
+        <FaArrowLeft onClick={navigateBack} className="my-auto"/>
         </div>
-        <div className=" self-center text-center my-auto text-2xl font-bold">
+        <div className="grow flex items-center justify-center my-auto text-2xl font-semibold">
             <h1>Buat Laporan</h1>
         </div>
-       <div></div>
+       <div className="w-8 h-4"></div>
     </div>
 }
 export default HeaderSection

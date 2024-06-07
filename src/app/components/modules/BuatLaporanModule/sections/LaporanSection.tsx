@@ -3,9 +3,66 @@ import Stack from "@/app/components/elements/Stack"
 import SubmitLaporanElement from "../element/SubmitLaporanElement"
 import { Input } from "@/components/ui/input"
 import { useState } from "react"
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
 
-const LaporanSection = ()=> {
+
+import { zodResolver } from "@hookform/resolvers/zod"
+import { format } from "date-fns"
+import { CalendarIcon } from "lucide-react"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+ 
+import { cn } from "@/lib/utils"
+import { Calendar } from "@/components/ui/calendar"
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { toast } from "@/components/ui/use-toast"
+
+const FormSchema = z.object({
+    dob: z.date({
+        required_error: "A date of birth is required.",
+    }),
+})
+
+const LaporanSection = () => {
     const [image, setImage] = useState<string | null>(null);
+    const [position, setPosition] = useState("Pilih Jenis Tindakan Kriminal")
+    const form = useForm<z.infer<typeof FormSchema>>({
+        resolver: zodResolver(FormSchema),
+    })
+    
+    function onSubmit(data: z.infer<typeof FormSchema>) {
+    toast({
+        title: "You submitted the following values:",
+        description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+            <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+        ),
+    })
+    }
+
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
@@ -28,11 +85,25 @@ const LaporanSection = ()=> {
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Jenis Tindakan Kriminal</label>
-            <Stack>
-            <input  placeholder="Tulis tanggal kejadian" 
-            className="w-full text-sm text-black border-2 pr-2 pl-10 py-3 border-blue-400 rounded-md"/>
-            <img src="./calendar.svg" className="my-auto ml-auto mr-4" />
-            </Stack>
+            <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="outline" className={`justify-start pl-8 border-blue-400 border-2 rounded-md py-5 ${position !== "Pilih Jenis Tindakan Kriminal" ? "text-black hover:text-black" : "text-gray-400 hover:text-gray-400"} hover:text-gray-400 hover:bg-white `}>
+                    {position}
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="justify-items-start bg-[#EBF8FE]">
+                <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+                <DropdownMenuRadioItem value="Pencurian">Pencurian</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Penculikan">Penculikan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Pelecehan">Pelecehan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Pemerkosaan">Pemerkosaan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Kekerasan">Kekerasan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Pembegalan">Pembegalan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Penipuan">Penipuan</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="Narkoba">Narkoba</DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+            </DropdownMenu>
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Waktu Kejadian</label>
@@ -44,11 +115,52 @@ const LaporanSection = ()=> {
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Tanggal Kejadian</label>
-            <Stack>
-            <input  placeholder="Tulis tanggal kejadian" 
-            className="w-full text-sm text-black border-2 pr-2 pl-10 py-3 border-blue-400 rounded-md"/>
-            <img src="./calendar.svg" className="my-auto ml-4" />
-            </Stack>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <FormField
+                        control={form.control}
+                        name="dob"
+                        render={({ field }) => (
+                            <FormItem className="flex flex-col">
+                                <Popover>
+                                    <PopoverTrigger asChild>
+                                        <FormControl>
+                                            <Button
+                                                variant={"outline"}
+                                                className={cn(
+                                                    "pl-3 text-left font-normal w-full border-blue-400 border-2 rounded-md justify-start",
+                                                    !field.value && "text-muted-foreground"
+                                                )}
+                                            >
+                                                <div className="flex items-center space-x-4 justify-start">
+                                                    <CalendarIcon className="h-4 w-4 opacity-50" />
+                                                    {field.value ? (
+                                                        <span>{format(field.value, "PPP")}</span>
+                                                    ) : (
+                                                        <span className="text-gray-400">Pilih Tanggal Kejadian</span>
+                                                    )}
+                                                </div>
+                                            </Button>
+                                        </FormControl>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-auto p-0" align="start">
+                                        <Calendar
+                                            mode="single"
+                                            selected={field.value}
+                                            onSelect={field.onChange}
+                                            disabled={(date) =>
+                                                date > new Date() || date < new Date("1900-01-01")
+                                            }
+                                            initialFocus
+                                        />
+                                    </PopoverContent>
+                                </Popover>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                </form>
+            </Form>
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Lokasi Kejadian</label>
