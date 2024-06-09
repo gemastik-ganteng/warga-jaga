@@ -1,6 +1,6 @@
 import DetailLaporanModule from "@/app/components/modules/DetailLaporanModule"
 
-const DetailLaporan = ()=>{
+const DetailLaporan = () => {
     return <DetailLaporanModule/>
 }
 
