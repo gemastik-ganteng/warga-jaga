@@ -1,9 +1,33 @@
 "use client"
+import { useLaporan } from "@/components/context/LaporanContext";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const LaporanAIContentSection = () => {
     const [image, setImage] = useState<string | null>(null);
+    const {laporan, setLaporan} = useLaporan()
+    const router = useRouter()
+
+    const handleSendLaporan = () => {
+        setLaporan({
+            namaPelapor: "",
+            jenisTindakan: "",
+            waktuKejadian: "",
+            tanggalKejadian: "",
+            lokasiKejadian: "",
+            deskripsiKejadian: "",
+            bukti: [{
+                url: "./bukti.png",
+                type: "IMAGE"
+            },{
+                url: "./bukti.png",
+                type: "IMAGE"
+            }]
+        })
+
+        router.push("/buat-laporan")
+    }
 
     const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -63,7 +87,7 @@ const LaporanAIContentSection = () => {
         </div>
 
         <div>
-            <Button className="font-semibold">Generate Laporan Otomatis</Button>
+            <Button className="font-semibold" onClick={handleSendLaporan}>Generate Laporan Otomatis</Button>
         </div>
 
     </div>

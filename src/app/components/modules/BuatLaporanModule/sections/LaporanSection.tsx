@@ -37,6 +37,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
+import { useLaporan } from "@/components/context/LaporanContext"
 
 const FormSchema = z.object({
     dob: z.date({
@@ -50,6 +51,8 @@ const LaporanSection = () => {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
+    const {laporan, setLaporan} = useLaporan()
+    console.log(laporan)
     
     function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({

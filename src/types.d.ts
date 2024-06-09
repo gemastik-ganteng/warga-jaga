@@ -10,7 +10,6 @@ export interface Laporan {
 }
 
 export interface Bukti{
-    name: string,
     url: string,
     type: 'IMAGE'|'VIDEO'|'AUDIO'|'DOKUMEN'
 }
