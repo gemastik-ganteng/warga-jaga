@@ -42,7 +42,7 @@ const ContentSection = ()=> {
                                         <h1 className="truncate text-base">{data.title}</h1>
                                         <h1 className="text-xs text-[#2653C7]">{`${data.tanggal}(${data.status})`}</h1>
                                     </div>
-                                    <button className="my-auto rounded-full text-white text-center bg-[#2653C7] px-4 py-1 text-xs">Cek Berkas</button>
+                                    <Button className="my-auto rounded-full text-white text-center bg-[#2653C7] px-4 py-1 text-xs">Cek Berkas</Button>
                                 </div>
                                 </div>
                             </Card>
