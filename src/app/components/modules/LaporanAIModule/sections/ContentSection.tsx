@@ -11,12 +11,12 @@ const LaporanAIContentSection = () => {
 
     const handleSendLaporan = () => {
         setLaporan({
-            namaPelapor: "",
-            jenisTindakan: "",
-            waktuKejadian: "",
-            tanggalKejadian: "",
-            lokasiKejadian: "",
-            deskripsiKejadian: "",
+            namaPelapor: "Andi Mulyandi",
+            jenisTindakan: "Penculikan",
+            waktuKejadian: "12.30",
+            tanggalKejadian: "12 Oktober 2023",
+            lokasiKejadian: "Depok",
+            deskripsiKejadian: "Ada penculikan, tolong diusut ya",
             bukti: [{
                 url: "./bukti.png",
                 type: "IMAGE"

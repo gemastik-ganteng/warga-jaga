@@ -52,7 +52,13 @@ const LaporanSection = () => {
         resolver: zodResolver(FormSchema),
     })
     const {laporan, setLaporan} = useLaporan()
-    console.log(laporan)
+    const [namaPelapor, setNamaPelapor] = useState(laporan?.namaPelapor)
+    const [jenisTindakan, setJenisTindakan] = useState(laporan?.jenisTindakan)
+    const [waktuKejadian, setWaktuKejadian] = useState(laporan?.waktuKejadian)
+    const [tanggalKejadian, setTanggalKejadian] = useState(laporan?.tanggalKejadian)
+    const [lokasiKejadian, setLokasiKejadian] = useState(laporan?.lokasiKejadian)
+    const [deskripsiKejadian, setDeskripsiKejadian] = useState(laporan?.deskripsiKejadian)
+    const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
     
     function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -82,8 +88,9 @@ const LaporanSection = () => {
     <div className="flex flex-col w-full mt-8 space-y-4 mb-4">
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Nama Pelapor</label>
-            <input placeholder="Tulis nama lengkap Anda" 
-            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"/>
+            <input placeholder="Tulis nama lengkap Anda"
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md" value={namaPelapor}
+            onChange={(e) => setNamaPelapor(e.target.value)}/>
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Jenis Tindakan Kriminal</label>
@@ -111,7 +118,8 @@ const LaporanSection = () => {
             <label className="text-lg text-black font-semibold">Waktu Kejadian</label>
             <Stack>
             <input  placeholder="Tulis waktu kejadian" 
-            className="w-full text-sm text-black border-2 pr-2 pl-10 py-3 border-blue-400 rounded-md"/>
+            className="w-full text-sm text-black border-2 pr-2 pl-10 py-3 border-blue-400 rounded-md" 
+            value={waktuKejadian} onChange={(e) => {setWaktuKejadian(e.target.value)}}/>
             <img src="./clock.svg" className="my-auto ml-4" />
             </Stack>
         </div>
@@ -167,12 +175,14 @@ const LaporanSection = () => {
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Lokasi Kejadian</label>
             <input placeholder="Tulis detail lokasi kejadian" 
-            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"/>
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
+            value={lokasiKejadian} onChange={(e) => {setLokasiKejadian(e.target.value)}}/>
         </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Deskripsi</label>
             <input placeholder="Ceritakan kejadian dengan rinci" 
-            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"/>
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
+            value={deskripsiKejadian} onChange={(e) => {setDeskripsiKejadian(e.target.value)}}/>
         </div>
         
         <div className="flex flex-col w-full space-y-1">
