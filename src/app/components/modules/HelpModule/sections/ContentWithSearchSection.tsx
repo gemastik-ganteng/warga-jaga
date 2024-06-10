@@ -14,8 +14,8 @@ interface QNA {
 const ContentWithSearchSection = ({QnAList}: {QnAList: QNA[]}) => {
     return <div className="flex flex-col space-y-1">
         <div className="w-full px-2 space-y-2">
-            {QnAList.map((QnA) => {
-                return <Accordion type="multiple" className=" border-2 bg-sky-100 border-slate-400 rounded-sm px-2 h-fit">
+            {QnAList.map((QnA, index) => {
+                return <Accordion key={index} type="multiple" className=" border-2 bg-sky-100 border-slate-400 rounded-sm px-2 h-fit">
                     <AccordionItem value={`item-1`} className="">
                     <AccordionTrigger className="text-sm font-normal text-justify text-cyan-600">{QnA.question}</AccordionTrigger>
                     <AccordionContent>
