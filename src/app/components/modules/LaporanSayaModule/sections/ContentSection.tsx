@@ -1,5 +1,8 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { useRouter } from "next/navigation"
+
 
 type LaporanSayaTileInformation = {
     title: string,
@@ -25,6 +28,7 @@ const laporanSayaList: LaporanSayaTileInformation[] = [
     }
 ]
 const ContentSection = ()=> {
+    const router = useRouter()
     return <div className="flex flex-col w-full text-xl font-medium items-center mt-6 px-4">
         <h1 className="font-semibold mb-4">Riwayat Laporan</h1>
         <div className="flex flex-col w-full items-center space-y-2">
@@ -42,7 +46,8 @@ const ContentSection = ()=> {
                                         <h1 className="truncate text-base">{data.title}</h1>
                                         <h1 className="text-xs text-[#2653C7]">{`${data.tanggal}(${data.status})`}</h1>
                                     </div>
-                                    <Button className="my-auto rounded-full text-white text-center bg-[#2653C7] px-4 py-1 text-xs">Cek Berkas</Button>
+                                    <Button className="my-auto rounded-full text-white text-center bg-[#2653C7] px-4 py-1 text-xs"
+                                        onClick={() => router.push("progres-laporan")}>Cek Berkas</Button>
                                 </div>
                                 </div>
                             </Card>
