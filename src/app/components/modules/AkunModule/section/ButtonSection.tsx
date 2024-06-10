@@ -2,7 +2,7 @@ import React from "react";
 
 const ButtonSection = () => {
   return (
-    <div className="flex flex-col justify-center w-full items-center gap-2 mt-4">
+    <div className="flex flex-col justify-center w-full items-center gap-2 my-4">
       <button className="bg-[#2653C7] hover:bg-[#10192e] text-white font-bold py-2 px-4 rounded-lg w-56">
         Simpan
       </button>
