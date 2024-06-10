@@ -72,7 +72,6 @@ const LaporanSection = () => {
 
     useEffect(()=>{
         if(laporan){
-            console.log(laporan)
             const buktibukti = laporan.bukti;
             const nwFiles: File[] = [];
             for(const bukti of buktibukti){
