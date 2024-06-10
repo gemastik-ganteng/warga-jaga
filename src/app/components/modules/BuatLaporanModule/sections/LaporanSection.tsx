@@ -133,7 +133,7 @@ const LaporanSection = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="justify-items-start bg-[#EBF8FE]">
-                <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
+                <DropdownMenuRadioGroup value={position? position : undefined} onValueChange={setPosition}>
                 <DropdownMenuRadioItem value="Pencurian">Pencurian</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="Penculikan">Penculikan</DropdownMenuRadioItem>
                 <DropdownMenuRadioItem value="Pelecehan">Pelecehan</DropdownMenuRadioItem>
