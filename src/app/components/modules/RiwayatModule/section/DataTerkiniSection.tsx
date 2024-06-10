@@ -1,6 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 const DataTerkiniSection = () => {
+  const router = useRouter()
   return (
     <>
       <div className="flex flex-col w-full px-5 py-2 justify-center items-center">
@@ -26,6 +29,7 @@ const DataTerkiniSection = () => {
 
         <button
           className="p-[10px] text-sm bg-[#2653C7] text-white w-full text-center rounded-lg mt-2"
+          onClick = {() => router.push("/riwayat-kejadian")}
         >
           Lihat Riwayat Kriminal
         </button>

@@ -1,5 +1,6 @@
 "use client";
 
+import Stack from "@/app/components/elements/Stack";
 import Image from "next/image";
 
 const HeroSection = () => {
@@ -13,10 +14,13 @@ const HeroSection = () => {
           </div>
 
           <div className="w-full flex flex-col pt-1">
-            <input
-              placeholder="Cari lokasi lain ..."
-              className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
-            />
+            <Stack>
+              <input
+                placeholder="Cari lokasi lain ..."
+                className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md"
+              />
+              <Image src="./search.svg" className="my-auto ml-4" alt="" width={20} height={20}/>
+            </Stack>
           </div>
 
           <div className="rounded-md w-full pt-2">
