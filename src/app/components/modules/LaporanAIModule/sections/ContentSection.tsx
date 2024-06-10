@@ -3,10 +3,14 @@ import { useLaporan } from "@/components/context/LaporanContext";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import FileTile from "../module-elements/FileTile";
 
 const LaporanAIContentSection = () => {
-    const [image, setImage] = useState<string | null>(null);
+
     const {laporan, setLaporan} = useLaporan()
+    const [files, setFiles] = useState<File[]>([]);
+    const [prompt, setPrompt] = useState<string>("")
+    
     const router = useRouter()
 
     const handleSendLaporan = () => {
@@ -28,32 +32,26 @@ const LaporanAIContentSection = () => {
 
         router.push("/buat-laporan")
     }
-
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            if (typeof reader.result === 'string') {
-            setImage(reader.result);
-            }
-        };
-        reader.readAsDataURL(file);
+            setFiles([...files, file])    
         }
-    };
-
+    }
+    
     return <div className="grow flex flex-col justify-between p-8">
         <div>
-            <div className="text-left text-sm">
-                Yuk, Masukan bukti agar kami mengetahui konteks laporan
+            <div className="text-sm text-center">
+                Yuk, Masukan bukti-bukti agar kami mengetahui konteks laporan
             </div>
 
-            <div className="flex w-full justify-between mt-6">
-                <div className="bg-[#2653C7] w-14 h-14 rounded-sm"/>
-                <div className="bg-[#2653C7] w-14 h-14 rounded-sm"/>
-                <div className="bg-[#2653C7] w-14 h-14 rounded-sm"/>
-                <div className="bg-[#2653C7] w-14 h-14 rounded-sm"/>
-            </div>
+            <div className="w-full flex flex-col space-y-1 mt-8">
+            <label className="text-lg text-black font-semibold">Prompt Pelapor (opsional)</label>
+            <input placeholder="Tulis Prompt (Opsional)"
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md" value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}/>
+        </div>
 
             <div className="flex flex-col w-full space-y-1 mt-8">
                 <label className="text-lg text-black font-semibold">Upload Bukti Kejadian</label>
@@ -61,9 +59,7 @@ const LaporanAIContentSection = () => {
                     <label
                     htmlFor="file-upload"
                     className="flex flex-col items-center justify-center w-full h-32 border-2 border-blue-400 bg-white rounded-md cursor-pointer">
-                    {image ? (
-                        <img src={image} alt="Uploaded" className="object-contain h-full w-full py-1" />
-                    ) : (
+
                         <div className="flex flex-col items-center justify-center pt-7 pb-7">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -79,15 +75,35 @@ const LaporanAIContentSection = () => {
                                 <line x1="12" y1="15" x2="12" y2="3" />
                             </svg>
                         </div>
-                    )}
-                    <input id="file-upload" type="file" className="opacity-0" onChange={handleImageChange} />
+                    <input id="file-upload" type="file" className="opacity-0" onChange={handleFileChange} />
                     </label>
+                </div>
+                <div className="pt-8">
+                <label className="text-lg text-black font-semibold ">Bukti-Bukti Kejadian</label>
+                </div>
+                {
+                    files.length == 0 && <div className="py-16 w-full flex ">
+                        <h1 className="text-black text-sm text-center mx-auto">Belum ada bukti. Mohon Upload Bukti Kejadian</h1>
+                    </div>
+                }
+                <div className="flex flex-col items-center space-y-2">
+                    {
+                        files.map((data, index)=> {
+                            return <FileTile 
+                            key={`file-${index}`}
+                            file={data} 
+                            onDelete={()=>{
+                                setFiles(files => files.filter((file)=> file != data))
+                            }}
+                            />
+                        })
+                    }
                 </div>
             </div>
         </div>
 
-        <div>
-            <Button className="font-semibold" onClick={handleSendLaporan}>Generate Laporan Otomatis</Button>
+        <div className="flex items-center justify-center mt-8">
+            <Button className="font-semibold w-full" onClick={handleSendLaporan}>Generate Laporan Otomatis</Button>
         </div>
 
     </div>
