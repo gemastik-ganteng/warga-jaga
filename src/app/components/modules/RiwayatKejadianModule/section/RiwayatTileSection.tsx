@@ -49,6 +49,11 @@ const RiwayatTileSection = () => {
     }
   }, 300);
 
+  const handleClear = () => {
+    setSearch("");
+    handleSearch();
+  };
+
   useEffect(() => {
     handleSearch();
     return () => {
@@ -68,16 +73,26 @@ const RiwayatTileSection = () => {
                   handleSearch();
                 }}
                 placeholder="Cari lokasi lain ..."
-                className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md"
+                className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md flex"
                 value={search}
               />
               <Image
                 src="./search.svg"
-                className="my-auto ml-4"
+                className="my-auto ml-4 flex"
                 alt=""
                 width={20}
                 height={20}
               />
+              <div className="flex w-10 ml-auto my-auto">
+                {search && (
+                  <button
+                    onClick={handleClear}
+                    className="text-gray-500 hover:text-gray-700 text-xl"
+                  >
+                    &times;
+                  </button>
+                )}
+              </div>
             </Stack>
           </div>
           <div className="flex gap-2 mt-2">
@@ -89,6 +104,11 @@ const RiwayatTileSection = () => {
             </button>
           </div>
           <div className="flex flex-col w-full items-center space-y-3 mt-4">
+            {riwayatKejadian.length === 0 && (
+              <p className="text-center text-lg text-gray-500">
+                Tidak ada data yang ditemukan
+              </p>
+            )}
             {riwayatKejadian.map((data, index) => {
               return (
                 <Card
