@@ -3,17 +3,18 @@ import Stack from "@/app/components/elements/Stack";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const RegisterBoxSection = ()=> {
-		const [nama, setNama] = useState<string>("");
-		const [phone, setPhone] = useState<string>("");
+
+type RegisterSectionProps = {
+    onNavigateToNextStep: ()=> void
+}
+const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextStep})=> {
+	const [nama, setNama] = useState<string>("");
+	const [phone, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const router = useRouter();
-
-    const handleLogin = ()=>{
-
-        router.push("/")
+    const handleRegisterNextStep = ()=>{
+        onNavigateToNextStep()
     }
 
 
@@ -44,8 +45,8 @@ const RegisterBoxSection = ()=> {
             <img src="./password.svg" className="my-auto ml-4" alt="" />
             </Stack>
         </div>
-        <button onClick={handleLogin} className="p-[10px] text-sm bg-[#2653C7] text-white w-full text-center rounded-lg">
-            Masuk
+        <button onClick={handleRegisterNextStep} className="p-[10px] text-sm bg-[#2653C7] text-white w-full text-center rounded-lg">
+            Lanjutkan
         </button>
 
     </div>
