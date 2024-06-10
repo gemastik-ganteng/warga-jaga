@@ -1,4 +1,3 @@
-import AktivitasTerkiniSection from "./sections/AktivitasTerkiniSection"
 import GreetingSection from "./sections/GreetingSection"
 import HeaderSection from "./sections/HeaderSection"
 import QuickActionSection from "./sections/QuickActionSection"
@@ -10,7 +9,6 @@ const HomepageModule = () => {
         <GreetingSection/>
         <QuickActionSection/>
         <StatistikLaporanSection/>
-        <AktivitasTerkiniSection/>     
     </div>
 }
 

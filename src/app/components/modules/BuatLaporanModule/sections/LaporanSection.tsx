@@ -49,10 +49,7 @@ const FormSchema = z.object({
 
 const LaporanSection = () => {
     const [image, setImage] = useState<string | null>(null);
-    const [position, setPosition] = useState<string | null>("Pilih Jenis Tindakan Kriminal")
-    const form = useForm<z.infer<typeof FormSchema>>({
-        resolver: zodResolver(FormSchema),
-    })
+    const [position, setPosition] = useState<string | undefined>("Pilih Jenis Tindakan Kriminal")
     const {laporan, setLaporan} = useLaporan()
     const [files, setFiles] = useState<File[]>([]);
     const [namaPelapor, setNamaPelapor] = useState(laporan?.namaPelapor)
@@ -64,13 +61,15 @@ const LaporanSection = () => {
     const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
 
     useEffect(() => {
-        setPosition(laporan?.jenisTindakan ?? null)
+        setPosition(laporan?.jenisTindakan ?? "Pilih Jenis Tindakan Kriminal")
         setNamaPelapor(laporan?.namaPelapor)
         setJenisTindakan(laporan?.jenisTindakan)
         setWaktuKejadian(laporan?.waktuKejadian)
         setTanggalKejadian(laporan?.tanggalKejadian)
         setLokasiKejadian(laporan?.lokasiKejadian)
         setDeskripsiKejadian(laporan?.deskripsiKejadian)
+
+        console.log(laporan?.tanggalKejadian)
     },[laporan])
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,8 +88,14 @@ const LaporanSection = () => {
             }
             setFiles(nwFiles)
         }
-        
     }, [laporan]);
+
+    const form = useForm<z.infer<typeof FormSchema>>({
+      resolver: zodResolver(FormSchema),
+      defaultValues: {
+          dob: (tanggalKejadian ? new Date() : new Date()),
+      },
+  })
     
     function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -156,54 +161,54 @@ const LaporanSection = () => {
             </Stack>
         </div>
         <div className="w-full flex flex-col space-y-1">
-            <label className="text-lg text-black font-semibold">Tanggal Kejadian</label>
-            <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                    <FormField
-                        control={form.control}
-                        name="dob"
-                        render={({ field }) => (
-                            <FormItem className="flex flex-col">
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <FormControl>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "pl-3 text-left font-normal w-full border-blue-400 border-2 rounded-md justify-start",
-                                                    !field.value && "text-muted-foreground"
-                                                )}
-                                            >
-                                                <div className="flex items-center space-x-4 justify-start">
-                                                    <CalendarIcon className="h-4 w-4 opacity-50" />
-                                                    {field.value ? (
-                                                        <span>{format(field.value, "PPP")}</span>
-                                                    ) : (
-                                                        <span className="text-gray-400">Pilih Tanggal Kejadian</span>
-                                                    )}
-                                                </div>
-                                            </Button>
-                                        </FormControl>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0" align="start">
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange}
-                                            disabled={(date) =>
-                                                date > new Date() || date < new Date("1900-01-01")
-                                            }
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                                <FormMessage />
-                            </FormItem>
+      <label className="text-lg text-black font-semibold">Tanggal Kejadian</label>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <FormField
+            control={form.control}
+            name="dob"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "pl-3 text-left font-normal w-full border-blue-400 border-2 rounded-md justify-start",
+                          !field.value && "text-muted-foreground"
                         )}
+                      >
+                        <div className="flex items-center space-x-4 justify-start">
+                          <CalendarIcon className="h-4 w-4 opacity-50" />
+                          {field.value ? (
+                            <span>{format(field.value, "PPP")}</span>
+                          ) : (
+                            <span className="text-gray-400">Pilih Tanggal Kejadian</span>
+                          )}
+                        </div>
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) =>
+                        date > new Date() || date < new Date("1900-01-01")
+                      }
+                      initialFocus
                     />
-                </form>
-            </Form>
-        </div>
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </form>
+      </Form>
+    </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Lokasi Kejadian</label>
             <input placeholder="Tulis detail lokasi kejadian" 

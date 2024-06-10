@@ -1,5 +1,5 @@
 const StatistikLaporanSection = ()=> {
-    return <div className="flex flex-col w-full items-center p-4">
+    return <div className="flex flex-col w-full items-center p-4 mt-10">
         <h1 className="text-xl text-[#2653C7] font-bold">Statistik Laporan</h1>
         <div className="grid grid-cols-3 p-4 gap-4">
         <a style={{
