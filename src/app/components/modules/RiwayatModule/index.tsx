@@ -7,7 +7,7 @@ import HeroSection from "./section/HeroSection";
 
 const HistoryModule = () => {
   return (
-    <div className="w-screen min-h-screen flex flex-col justify-center bg-white">
+    <div className="w-screen min-h-screen flex flex-col justify-center pb-24 bg-white">
       <Navbar/>
       <HeaderSection />
       <HeroSection />

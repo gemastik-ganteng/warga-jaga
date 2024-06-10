@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/ui/navbar";
 import BahasaSection from "./section/BahasaSection";
 import ButtonSection from "./section/ButtonSection";
 import HeaderSection from "./section/HeaderSection";
@@ -8,7 +9,8 @@ import ProfileSection from "./section/ProfileSection";
 
 const AkunModule = () => {
   return (
-      <div className="w-screen min-h-screen flex flex-col justify-start bg-white">
+      <div className="w-screen min-h-screen flex flex-col justify-start bg-white pb-24">
+        <Navbar/>
         <HeaderSection />
         <ProfileSection />
         <PreferensiSection />
