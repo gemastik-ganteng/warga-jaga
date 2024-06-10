@@ -49,7 +49,7 @@ const FormSchema = z.object({
 
 const LaporanSection = () => {
     const [image, setImage] = useState<string | null>(null);
-    const [position, setPosition] = useState("Pilih Jenis Tindakan Kriminal")
+    const [position, setPosition] = useState<string | null>("Pilih Jenis Tindakan Kriminal")
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
     })
@@ -62,6 +62,16 @@ const LaporanSection = () => {
     const [lokasiKejadian, setLokasiKejadian] = useState(laporan?.lokasiKejadian)
     const [deskripsiKejadian, setDeskripsiKejadian] = useState(laporan?.deskripsiKejadian)
     const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
+
+    useEffect(() => {
+        setPosition(laporan?.jenisTindakan ?? null)
+        setNamaPelapor(laporan?.namaPelapor)
+        setJenisTindakan(laporan?.jenisTindakan)
+        setWaktuKejadian(laporan?.waktuKejadian)
+        setTanggalKejadian(laporan?.tanggalKejadian)
+        setLokasiKejadian(laporan?.lokasiKejadian)
+        setDeskripsiKejadian(laporan?.deskripsiKejadian)
+    },[laporan])
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -203,7 +213,7 @@ const LaporanSection = () => {
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Deskripsi</label>
             <input placeholder="Ceritakan kejadian dengan rinci" 
-            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
+            className="h-20 w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
             value={deskripsiKejadian} onChange={(e) => {setDeskripsiKejadian(e.target.value)}}/>
         </div>
         
