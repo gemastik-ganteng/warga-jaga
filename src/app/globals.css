@@ -87,3 +87,9 @@
       @apply bg-background text-foreground;
     }
   }
+
+  @layer utilities {
+    .bg-radial {
+      background: radial-gradient(50% 50% at 50% 50%, rgba(195, 215, 255, 0.75) 0%, #FFF 100%);
+    }
+  }
