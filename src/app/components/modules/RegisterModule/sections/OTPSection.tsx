@@ -33,7 +33,7 @@ const OTPSection: React.FC<OTPSectionProps> = ({ nextStep }) => {
       <div className="grid w-full">
         <div className="grid mx-auto w-full mt-6 max-w-sm items-center gap-y-1.5">
           <Label htmlFor="otp">Kode OTP</Label>
-          <Input type="text" id="otp" placeholder="Masukkan Kode OTP" />
+          <Input type="number" id="otp" placeholder="Masukkan Kode OTP" />
           <p className="text-sm text-center mt-2">
             Sisa waktu: {formatTime(timeLeft)}
           </p>
