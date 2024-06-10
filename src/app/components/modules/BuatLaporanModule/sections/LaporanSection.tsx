@@ -1,7 +1,7 @@
 "use client"
 import Stack from "@/app/components/elements/Stack"
 import SubmitLaporanElement from "../element/SubmitLaporanElement"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -38,6 +38,8 @@ import {
 } from "@/components/ui/popover"
 import { toast } from "@/components/ui/use-toast"
 import { useLaporan } from "@/components/context/LaporanContext"
+import FileTile from "../element/FileTile"
+import { convertBase64ToFile } from "@/utility/FileService"
 
 const FormSchema = z.object({
     dob: z.date({
@@ -52,6 +54,7 @@ const LaporanSection = () => {
         resolver: zodResolver(FormSchema),
     })
     const {laporan, setLaporan} = useLaporan()
+    const [files, setFiles] = useState<File[]>([]);
     const [namaPelapor, setNamaPelapor] = useState(laporan?.namaPelapor)
     const [jenisTindakan, setJenisTindakan] = useState(laporan?.jenisTindakan)
     const [waktuKejadian, setWaktuKejadian] = useState(laporan?.waktuKejadian)
@@ -59,6 +62,26 @@ const LaporanSection = () => {
     const [lokasiKejadian, setLokasiKejadian] = useState(laporan?.lokasiKejadian)
     const [deskripsiKejadian, setDeskripsiKejadian] = useState(laporan?.deskripsiKejadian)
     const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setFiles([...files, file])    
+        }
+    }
+
+    useEffect(()=>{
+        if(laporan){
+            console.log(laporan)
+            const buktibukti = laporan.bukti;
+            const nwFiles: File[] = [];
+            for(const bukti of buktibukti){
+                nwFiles.push(convertBase64ToFile(bukti))
+            }
+            setFiles(nwFiles)
+        }
+        
+    }, [laporan]);
     
     function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -191,9 +214,6 @@ const LaporanSection = () => {
                 <label
                 htmlFor="file-upload"
                 className="flex flex-col items-center justify-center w-full h-32 border-2 border-blue-400 bg-white rounded-md cursor-pointer">
-                {image ? (
-                    <img src={image} alt="Uploaded" className="object-contain h-full w-full py-1" />
-                ) : (
                     <div className="flex flex-col items-center justify-center pt-7 pb-7">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -209,10 +229,30 @@ const LaporanSection = () => {
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
                     </div>
-                )}
-                <input id="file-upload" type="file" className="opacity-0" onChange={handleImageChange} />
+                <input id="file-upload" type="file" className="opacity-0" onChange={handleFileChange} />
                 </label>
             </div>
+            <div className="pt-8">
+                <label className="text-lg text-black font-semibold ">Bukti-Bukti Kejadian</label>
+                </div>
+                {
+                    files.length == 0 && <div className="py-16 w-full flex ">
+                        <h1 className="text-black text-sm text-center mx-auto">Belum ada bukti. Mohon Upload Bukti Kejadian</h1>
+                    </div>
+                }
+                <div className="flex flex-col items-center space-y-2">
+                    {
+                        files.map((data, index)=> {
+                            return <FileTile 
+                            key={`file-${index}`}
+                            file={data} 
+                            onDelete={()=>{
+                                setFiles(files => files.filter((file)=> file != data))
+                            }}
+                            />
+                        })
+                    }
+                </div>
         </div>
 
     </div>

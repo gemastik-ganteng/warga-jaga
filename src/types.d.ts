@@ -9,7 +9,9 @@ export interface Laporan {
 
 }
 
-export interface Bukti{
-    url: string,
-    type: 'IMAGE'|'VIDEO'|'AUDIO'|'DOKUMEN'
+
+export interface Bukti {
+    name: string;
+    type: string;
+    base64: string;
 }

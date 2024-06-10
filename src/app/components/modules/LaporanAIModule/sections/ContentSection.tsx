@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FileTile from "../module-elements/FileTile";
+import { Laporan } from "@/types";
+import { fileToBase64 } from "@/utility/FileService";
 
 const LaporanAIContentSection = () => {
 
@@ -13,25 +15,30 @@ const LaporanAIContentSection = () => {
     
     const router = useRouter()
 
-    const handleSendLaporan = () => {
-        setLaporan({
+    const handleSendLaporan = async () => {
+        const buktiPromises = files.map(async (file) => ({
+            name: file.name,
+            type: file.type,
+            base64: await fileToBase64(file)
+        }));
+
+        const bukti = await Promise.all(buktiPromises);
+
+        const newLaporan: Laporan = {
             namaPelapor: "Andi Mulyandi",
             jenisTindakan: "Penculikan",
             waktuKejadian: "12.30",
             tanggalKejadian: "12 Oktober 2023",
             lokasiKejadian: "Depok",
             deskripsiKejadian: "Ada penculikan, tolong diusut ya",
-            bukti: [{
-                url: "./bukti.png",
-                type: "IMAGE"
-            },{
-                url: "./bukti.png",
-                type: "IMAGE"
-            }]
-        })
+            bukti
+        };
 
-        router.push("/buat-laporan")
-    }
+        console.log(newLaporan);
+
+        setLaporan(newLaporan);
+        router.push("/buat-laporan");
+    };
     
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];

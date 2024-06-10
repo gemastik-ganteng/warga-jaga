@@ -1,23 +1,57 @@
-"use client"
+'use client';
+
 import { Laporan } from "@/types";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { openDB } from "idb";
 
 interface LaporanContextType {
     laporan: Laporan | null;
     setLaporan: (newLaporan: Laporan) => void;
 }
-export const LaporanContext = createContext<LaporanContextType | undefined>(undefined);
-export const LaporanProvider = ({ children }: { children: ReactNode }) => {
-    const [laporan, setLaporan] = useState<Laporan | null>(() => {
-        const savedLaporan = localStorage.getItem('laporan');
-        return savedLaporan ? JSON.parse(savedLaporan) : null;
-    });
 
+export const LaporanContext = createContext<LaporanContextType | undefined>(undefined);
+
+const LaporanProvider = ({ children }: { children: ReactNode }) => {
+    const [laporan, setLaporan] = useState<Laporan | null>(null);
+
+    // Function to save laporan to IndexedDB
+    const saveLaporanToIndexedDB = async (newLaporan: Laporan) => {
+        const db = await openDB('laporanDB', 1, {
+            upgrade(db) {
+                if (!db.objectStoreNames.contains('laporans')) {
+                    db.createObjectStore('laporans', { keyPath: 'id', autoIncrement: true });
+                }
+            }
+        });
+        await db.put('laporans', newLaporan);
+    };
+
+    // Function to get laporan from IndexedDB
+    const fetchLaporanFromIndexedDB = async () => {
+        const db = await openDB('laporanDB', 1);
+        if (db.objectStoreNames.contains('laporans')) {
+            const laporan = await db.get('laporans', 1);
+            return laporan;
+        } else {
+            return null;
+        }
+    };
+
+    // Load laporan from IndexedDB when the component mounts
+    useEffect(() => {
+        const loadLaporan = async () => {
+            const savedLaporan = await fetchLaporanFromIndexedDB();
+            if (savedLaporan) {
+                setLaporan(savedLaporan);
+            }
+        };
+        loadLaporan();
+    }, []);
+
+    // Save laporan to IndexedDB whenever it changes
     useEffect(() => {
         if (laporan) {
-            localStorage.setItem('laporan', JSON.stringify(laporan));
-        } else {
-            localStorage.removeItem('laporan');
+            saveLaporanToIndexedDB(laporan);
         }
     }, [laporan]);
 
@@ -39,3 +73,6 @@ export const useLaporan = () => {
     }
     return context;
 };
+
+export default LaporanProvider;
+

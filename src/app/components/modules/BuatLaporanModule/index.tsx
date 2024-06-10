@@ -1,5 +1,6 @@
 "use client"
-import { LaporanProvider } from "@/components/context/LaporanContext"
+
+import LaporanProvider from "@/components/context/LaporanContext"
 import HeaderSection from "./sections/HeaderSection"
 import LaporanSection from "./sections/LaporanSection"
 
