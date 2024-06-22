@@ -14,6 +14,7 @@ const LoginBoxSection = ()=> {
     const handleLogin = async () => {
         try{
             const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/login", {username: email, password}); 
+            console.log(res)
             router.push("/")
         }
         catch(error){

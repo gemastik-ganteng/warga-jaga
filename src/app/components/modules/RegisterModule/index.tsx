@@ -35,7 +35,7 @@ export default function RegisterSection() {
 
     return (
         <div className="w-screen min-h-screen flex flex-col items-center justify-center px-4 bg-[#EBF8FE]">
-            
+            <div className="flex flex-col items-center mx-auto max-w-2xl w-full">
             {
                 phase.step === 'REGISTER' && <div className="flex flex-col w-full items-center">
                     <HeaderRegisterSection/>
@@ -74,6 +74,7 @@ export default function RegisterSection() {
             {
                 phase.step === 'COMPLETE' && <BerhasilVerifikasiSection/>
             }
+            </div>
         </div>
     )
 }

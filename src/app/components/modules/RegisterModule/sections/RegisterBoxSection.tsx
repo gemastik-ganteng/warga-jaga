@@ -24,19 +24,13 @@ const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextSte
             password:password
         }
 
-        console.log("WOI BOKKKEEEP")
-
         try{
-            const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/register", registerData)
-            console.log("HALO1")
+            await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/register", registerData)
             onNavigateToNextStep()
             setEmailGlobal(email)
-            console.log("HALO2")
-
         }
         catch(err:any){
             console.log(err)
-            console.log("WOY")
             alert("User dengan email tersebut sudah ada")
         }
 
