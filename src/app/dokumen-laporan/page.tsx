@@ -1,4 +1,4 @@
-import DokumenLaporanModule from "../components/modules/DokumenLaporanModule"
+import DokumenLaporanModule from "../../components/modules/DokumenLaporanModule"
 
 const DokumenLaporan = () => {
     return <DokumenLaporanModule/>

@@ -1,5 +1,5 @@
 "use client"
-import Stack from "@/app/components/elements/Stack";
+import Stack from "@/components/elements/Stack";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

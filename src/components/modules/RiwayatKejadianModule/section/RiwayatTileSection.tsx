@@ -1,49 +1,45 @@
 "use client";
 
-import Stack from "@/app/components/elements/Stack";
+import Stack from "@/components/elements/Stack";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
 
-interface DaftarLaporanData {
+interface RiwayatTileInformation {
   title: string;
   tanggal: string;
-	flagLaporan: string;
   jam: string;
   alamat: string;
 }
 
-const riwayatKejadianList: DaftarLaporanData[] = [
+const riwayatKejadianList: RiwayatTileInformation[] = [
   {
     title: "Kasus Pembegalan",
     tanggal: "05/03/2024",
-		flagLaporan: "Laporan Mencurigakan",
     jam: "12:00",
     alamat: "Jl aja",
   },
   {
     title: "Kasus Kekerasan",
     tanggal: "20/03/2024",
-		flagLaporan: "Laporan Mencurigakan",
     jam: "12:00",
     alamat: "Alfamart Kukusan",
   },
   {
     title: "Kasus Pencurian",
     tanggal: "10/03/2024",
-		flagLaporan: "Laporan Mencurigakan",
     jam: "12:00",
     alamat: "Jl. Apel No. 7",
   },
 ];
 
-const ContentSection = () => {
+const RiwayatTileSection = () => {
   const router = useRouter()
   const [search, setSearch] = useState<string | undefined>();
   const [riwayatKejadian, setRiwayatKejadian] =
-    useState<DaftarLaporanData[]>(riwayatKejadianList);
+    useState<RiwayatTileInformation[]>(riwayatKejadianList);
 
   const handleSearch = debounce(() => {
     if (search) {
@@ -105,7 +101,7 @@ const ContentSection = () => {
           </div>
           <div className="flex gap-2 mt-2">
             <button className="text-center rounded-full text-sm px-4 py-1 bg-[#EBF8FE] border border-[#2653C7] text-[#2653C7]">
-							Urutkan
+              Urutkan
             </button>
             <button className="text-center rounded-full text-sm px-4 py-1 bg-[#EBF8FE] border border-[#2653C7] text-[#2653C7]">
               Filter
@@ -123,25 +119,20 @@ const ContentSection = () => {
                   className="w-full border bg-[#EBF8FE] shadow-sm"
                   key={"data" + index}
                 >
-                  <div className="w-full flex h-full my-auto space-x-4 p-2 items-center justify-between text-black">
+                  <div className="flex w-full h-full my-auto space-x-4 p-2 items-center justify-between text-black">
                     <div className="grow flex flex-col gap-1 p-2">
-											<p className="text-lg font-bold">{data.title}</p>
+                      <p className="text-lg font-bold">{data.title}</p>
                       <p className="truncate text-xs">
                         {data.tanggal} pukul {data.jam}
                       </p>
                       <p className="text-xs">{data.alamat}</p>
                     </div>
-                    <div className="flex flex-col justify-between space-y-3">
-                      <div className="pt-2 border border-sky-700 rounded-lg h-fit w-32 text-[10px] text-nowrap text-center text-sky-700 self-end pb-1">
-                        {data.flagLaporan}
-                      </div>
-                      <button className="rounded-sm text-center bg-[#7ACEFA] text-xs self-end text-white py-2 px-5"
-                      onClick={() => router.push('/detail-laporan/1')}>
-                        Lihat
-                      </button>
-                    </div>
-										</div>
-									</Card>
+                    <button className="rounded-sm text-center bg-[#7ACEFA] text-xs self-end text-white py-2 px-5"
+                    onClick={() => router.push('/detail-laporan/1')}>
+                      Lihat
+                    </button>
+                  </div>
+                </Card>
               );
             })}
           </div>
@@ -151,4 +142,4 @@ const ContentSection = () => {
   );
 };
 
-export default ContentSection;
+export default RiwayatTileSection;

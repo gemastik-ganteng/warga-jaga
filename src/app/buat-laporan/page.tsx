@@ -1,4 +1,4 @@
-import BuatLaporanModule from "../components/modules/BuatLaporanModule";
+import BuatLaporanModule from "../../components/modules/BuatLaporanModule";
 
 export default function Page(){
     return <BuatLaporanModule/>

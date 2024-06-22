@@ -1,4 +1,4 @@
-import ProgressLaporanModule from "../../components/modules/ProgresLaporanModule"
+import ProgressLaporanModule from "../../../components/modules/ProgresLaporanModule"
 
 const ProgressLaporanPage = () => {
     return <ProgressLaporanModule/>

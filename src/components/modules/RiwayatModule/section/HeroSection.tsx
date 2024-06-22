@@ -1,6 +1,6 @@
 "use client";
 
-import Stack from "@/app/components/elements/Stack";
+import Stack from "@/components/elements/Stack";
 import Image from "next/image";
 
 const HeroSection = () => {

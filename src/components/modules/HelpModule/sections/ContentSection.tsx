@@ -1,6 +1,6 @@
 "use client"
 
-import Stack from "@/app/components/elements/Stack";
+import Stack from "@/components/elements/Stack";
 import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 import Image from "next/image";

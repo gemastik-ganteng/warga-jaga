@@ -1,4 +1,4 @@
-import RiwayatKejadianModule from "../components/modules/RiwayatKejadianModule";
+import RiwayatKejadianModule from "../../components/modules/RiwayatKejadianModule";
 
 
 export default function Page() {

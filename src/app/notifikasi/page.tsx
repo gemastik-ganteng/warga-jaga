@@ -1,4 +1,4 @@
-import NotifikasiModule from "../components/modules/NotifikasiModule";
+import NotifikasiModule from "../../components/modules/NotifikasiModule";
 
 export default function Page() {
   return <NotifikasiModule />;

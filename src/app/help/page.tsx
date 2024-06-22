@@ -1,4 +1,4 @@
-import HelpModule from "../components/modules/HelpModule"
+import HelpModule from "../../components/modules/HelpModule"
 
 const HelpPage = () => {
     return <HelpModule/>

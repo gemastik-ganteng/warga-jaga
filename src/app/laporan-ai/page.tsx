@@ -1,4 +1,4 @@
-import LaporanAIModule from "../components/modules/LaporanAIModule"
+import LaporanAIModule from "../../components/modules/LaporanAIModule"
 
 const LaporanAI = () => {
     return <LaporanAIModule/>

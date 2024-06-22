@@ -1,4 +1,4 @@
-import DaftarLaporanModule from "../components/modules/DaftarLaporanModule"
+import DaftarLaporanModule from "../../components/modules/DaftarLaporanModule"
 
 const DaftarLaporanPage = () => {
     return <DaftarLaporanModule/>

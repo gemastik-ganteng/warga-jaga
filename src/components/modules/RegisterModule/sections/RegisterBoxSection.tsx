@@ -1,5 +1,5 @@
 "use client"
-import Stack from "@/app/components/elements/Stack";
+import Stack from "@/components/elements/Stack";
 import { RegisterRequestDTO } from "@/types";
 import axios from "axios";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import DetailLaporanModule from "@/app/components/modules/DetailLaporanModule"
+import DetailLaporanModule from "@/components/modules/DetailLaporanModule"
 
 const DetailLaporan = () => {
     return <DetailLaporanModule/>

@@ -1,4 +1,4 @@
-import OpsiBuatLaporanModule from "../components/modules/OpsiBuatLaporanModule"
+import OpsiBuatLaporanModule from "../../components/modules/OpsiBuatLaporanModule"
 
 const OpsiLaporanPage = ()=> {
     return <OpsiBuatLaporanModule/>

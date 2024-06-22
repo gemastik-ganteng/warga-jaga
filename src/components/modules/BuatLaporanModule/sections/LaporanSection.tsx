@@ -1,5 +1,5 @@
 "use client"
-import Stack from "@/app/components/elements/Stack"
+import Stack from "@/components/elements/Stack"
 import SubmitLaporanElement from "../element/SubmitLaporanElement"
 import { useEffect, useState } from "react"
 import {
