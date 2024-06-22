@@ -13,7 +13,7 @@ const BerhasilVerifikasiSection = () => {
     </h1>
     <Button onClick={()=>{
         router.push("/login")
-    }} className="mt-6 w-full max-w-xs">Masuk ke Beranda</Button>
+    }} className="mt-6 w-full max-w-xs">Yuk Login Kembali</Button>
     </div>
    
 }
