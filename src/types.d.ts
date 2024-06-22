@@ -19,3 +19,10 @@ export interface Notifikasi {
   jam: string;
   deskripsi: string;
 }
+
+export interface RegisterRequestDTO {
+  name: string,
+  password: string,
+  email: string,
+  phone: string
+}

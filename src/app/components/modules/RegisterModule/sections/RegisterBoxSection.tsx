@@ -1,6 +1,7 @@
 "use client"
 import Stack from "@/app/components/elements/Stack";
-import { useRouter } from "next/navigation";
+import { RegisterRequestDTO } from "@/types";
+import axios from "axios";
 import { useState } from "react";
 
 
@@ -13,8 +14,27 @@ const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextSte
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleRegisterNextStep = ()=>{
-        onNavigateToNextStep()
+
+    const register = async () => {
+
+        const registerData: RegisterRequestDTO = {
+            name:nama,
+            phone:phone,
+            email:email,
+            password:password
+        }
+
+        try{
+            await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/register", registerData)
+            onNavigateToNextStep()
+
+        }
+        catch(err:any){
+            console.log(err)
+            console.log("WOY")
+            alert("User dengan email tersebut sudah ada")
+        }
+
     }
 
 
@@ -45,7 +65,7 @@ const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextSte
             <img src="./password.svg" className="my-auto ml-4" alt="" />
             </Stack>
         </div>
-        <button onClick={handleRegisterNextStep} className="p-[10px] text-sm bg-[#2653C7] text-white w-full text-center rounded-lg">
+        <button onClick={register} className="p-[10px] text-sm bg-[#2653C7] text-white w-full text-center rounded-lg">
             Lanjutkan
         </button>
 

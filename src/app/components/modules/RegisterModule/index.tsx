@@ -7,6 +7,8 @@ import OTPSection from "./sections/OTPSection"
 import IntroVerifikasiKTPSection from "./sections/IntroVerifikasiKTPSection"
 import VerifikasiKTPSection from "./sections/VerifikasiKTPSection"
 import BerhasilVerifikasiSection from "./sections/BerhasilVerifikasiSection"
+import axios from "axios";
+import { RegisterRequestDTO } from "@/types"
 
 type RegisterPhase = {
     step: 'REGISTER' | 'OTP' | 'INTRO_VERIFIKASI_KTP' |'VERIFIKASI_KTP' | 'COMPLETE'
@@ -20,6 +22,9 @@ export default function RegisterSection() {
             step: newStep
         });
     }
+
+   
+
     return (
         <div className="w-screen min-h-screen flex flex-col items-center justify-center px-4 bg-[#EBF8FE]">
             
@@ -27,6 +32,7 @@ export default function RegisterSection() {
                 phase.step === 'REGISTER' && <div className="flex flex-col w-full items-center">
                     <HeaderRegisterSection/>
                     <RegisterBoxSection onNavigateToNextStep={()=>{
+                        console.log('HERE')
                         navigateTo('OTP')
                     }}/>
                     <GoToLoginSection/>
