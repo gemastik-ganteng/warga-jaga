@@ -17,8 +17,8 @@ const QnAList: QNA[] = [
     {question: "Kapan laporan saya ditindak lanjut?", answer: "Laporan Anda akan ditindaklanjuti dalam waktu 3-5 hari kerja.", top: true},
     {question: "Bagaimana mendapat informasi lanjutan mengenai laporan saya?", answer: "Anda dapat memperoleh informasi lanjutan mengenai laporan Anda melalui portal online kami atau menghubungi layanan pelanggan kami.", top: true},
     {question: "Apa yang terjadi ketika saya tidak sengaja menghapus akun?", answer: "Jika Anda tidak sengaja menghapus akun, silakan hubungi dukungan teknis kami untuk bantuan pemulihan akun.", top: true},
-    {question: "Kapan prabowo jatuh?", answer: "Ini hanya contoh pertanyaan, tidak ada kejadian nyata terkait."},
-    {question: "Apa reaksi maaruf amin terhadap kekalahan evos?", answer: "Ini hanya contoh pertanyaan, tidak ada kejadian nyata terkait."},
+    {question: "Kapankah aplikasi dapat digunakan sepenuhnya?", answer: "Ini hanya contoh pertanyaan, tidak ada kejadian nyata terkait."},
+    {question: "Apakah seseorang dapat menjadi aparat sekaligus warga pada aplikasi ini?", answer: "Ini hanya contoh pertanyaan, tidak ada kejadian nyata terkait."},
 ];
 
 

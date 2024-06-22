@@ -17,13 +17,13 @@ const notifikasiData2: Notifikasi[] = [
     tanggal: "10/03/2024",
     jam: "12:00",
     deskripsi:
-      "Anda berhasil mengirimkan laporan “Kasus Pembugilan Isaac” yang terjadi di Jl. Ammonia IV, Beji Depok, Jawa Barat pukul 13.02.",
+      "Anda berhasil mengirimkan laporan “Kasus Pemukulan di deppok yang terjadi di Jl. Ammonia IV, Beji Depok, Jawa Barat pukul 13.02.",
   },
   {
     tanggal: "10/03/2024",
     jam: "12:00",
     deskripsi:
-      "Anda berhasil mengirimkan laporan “Kasus Pembugilan Isaac” yang terjadi di Jl. Ammonia IV, Beji Depok, Jawa Barat pukul 13.02.",
+      "Anda berhasil mengirimkan laporan “Kasus Pemukulan di deppok yang terjadi di Jl. Ammonia IV, Beji Depok, Jawa Barat pukul 13.02.",
   },
 ]
 

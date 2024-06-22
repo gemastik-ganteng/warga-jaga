@@ -25,7 +25,7 @@ const LaporanAIContentSection = () => {
         const bukti = await Promise.all(buktiPromises);
 
         const newLaporan: Laporan = {
-            namaPelapor: "Andi Mulyandi",
+            namaPelapor: "Mira Setiawan",
             jenisTindakan: "Penculikan",
             waktuKejadian: "12.30",
             tanggalKejadian: "12 Oktober 2023",

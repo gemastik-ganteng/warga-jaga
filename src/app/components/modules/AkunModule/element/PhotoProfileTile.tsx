@@ -9,7 +9,7 @@ const PhotoProfileTile = () => {
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <p className="text-2xl font-bold">Shadiq Alatas</p>
+        <p className="text-2xl font-bold">Mira Setiawan</p>
       </div>
     </>
   );
