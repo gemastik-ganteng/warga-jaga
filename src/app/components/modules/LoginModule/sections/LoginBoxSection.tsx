@@ -1,5 +1,6 @@
 "use client"
 import Stack from "@/app/components/elements/Stack";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -10,9 +11,14 @@ const LoginBoxSection = ()=> {
 
     const router = useRouter();
 
-    const handleLogin = ()=>{
-
-        router.push("/")
+    const handleLogin = async () => {
+        try{
+            const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/login", {username: email, password}); 
+            router.push("/")
+        }
+        catch(error){
+            router.push("/login")
+        }
     }
 
 

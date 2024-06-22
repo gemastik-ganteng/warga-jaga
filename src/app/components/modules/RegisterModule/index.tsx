@@ -14,8 +14,14 @@ type RegisterPhase = {
     step: 'REGISTER' | 'OTP' | 'INTRO_VERIFIKASI_KTP' |'VERIFIKASI_KTP' | 'COMPLETE'
 }
 
+type VerifyOTPData = {
+    otp: string,
+    email: string
+}
+
 export default function RegisterSection() {
     const [phase, setPhase] = useState<RegisterPhase>({step: 'REGISTER'})
+    const [email, setEmail] = useState<String>("")
 
     const navigateTo = ( newStep: 'REGISTER' | 'OTP' | 'INTRO_VERIFIKASI_KTP' |'VERIFIKASI_KTP' | 'COMPLETE')=> {
         setPhase({
@@ -23,7 +29,9 @@ export default function RegisterSection() {
         });
     }
 
-   
+    const setEmailGlobal = (emailProps: string) => {
+        setEmail(emailProps)
+    }
 
     return (
         <div className="w-screen min-h-screen flex flex-col items-center justify-center px-4 bg-[#EBF8FE]">
@@ -34,7 +42,8 @@ export default function RegisterSection() {
                     <RegisterBoxSection onNavigateToNextStep={()=>{
                         console.log('HERE')
                         navigateTo('OTP')
-                    }}/>
+                    }}
+                    setEmailGlobal={setEmailGlobal}/>
                     <GoToLoginSection/>
                 </div>
             }
@@ -42,7 +51,14 @@ export default function RegisterSection() {
             {
                 phase.step === 'OTP' && <div className="flex flex-col w-full items-center">
                     <HeaderRegisterSection/>
-                    <OTPSection nextStep={()=> navigateTo('INTRO_VERIFIKASI_KTP')}/>
+                    <OTPSection nextStep={async(otp: string)=> {
+                        const verifyOTPData = {
+                            otp, email
+                        }
+                        await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/verify-otp", verifyOTPData); 
+                        console.log("BOKEP")
+                        navigateTo('INTRO_VERIFIKASI_KTP')}
+                    }/>
                 </div>
             }
             {

@@ -7,13 +7,13 @@ import { useState } from "react";
 
 type RegisterSectionProps = {
     onNavigateToNextStep: ()=> void
+    setEmailGlobal: (emailProps: string) => void
 }
-const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextStep})=> {
+const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextStep, setEmailGlobal})=> {
 	const [nama, setNama] = useState<string>("");
 	const [phone, setPhone] = useState<string>("");
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-
 
     const register = async () => {
 
@@ -24,9 +24,14 @@ const RegisterBoxSection: React.FC<RegisterSectionProps> = ({onNavigateToNextSte
             password:password
         }
 
+        console.log("WOI BOKKKEEEP")
+
         try{
-            await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/register", registerData)
+            const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/register", registerData)
+            console.log("HALO1")
             onNavigateToNextStep()
+            setEmailGlobal(email)
+            console.log("HALO2")
 
         }
         catch(err:any){

@@ -12,7 +12,7 @@ const BerhasilVerifikasiSection = () => {
         Anda sudah bisa menggunakan seluruh fitur di aplikasi WargaJaga
     </h1>
     <Button onClick={()=>{
-        router.push("/")
+        router.push("/login")
     }} className="mt-6 w-full max-w-xs">Masuk ke Beranda</Button>
     </div>
    
