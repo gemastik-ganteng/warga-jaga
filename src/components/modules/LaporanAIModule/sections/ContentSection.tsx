@@ -25,6 +25,7 @@ const LaporanAIContentSection = () => {
         const bukti = await Promise.all(buktiPromises);
 
         const newLaporan: Laporan = {
+            judul: "Penculikan Mr Y",
             namaPelapor: "Mira Setiawan",
             jenisTindakan: "Penculikan",
             waktuKejadian: "12.30",

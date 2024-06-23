@@ -20,7 +20,8 @@ export const uploadReport = async (report: Laporan, files: File[], user: UserDat
       tanggalKejadian: report.tanggalKejadian,
       lokasiKejadian: report.lokasiKejadian,
       deskripsiKejadian: report.deskripsiKejadian,
-      base64strFiles: base64strFiles
+      base64strFiles: base64strFiles,
+      namaPelapor: report.namaPelapor,
     };
 
     console.log(dataDikirim);

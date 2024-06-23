@@ -55,6 +55,7 @@ const LaporanSection = () => {
     const [position, setPosition] = useState<string | undefined>("Pilih Jenis Tindakan Kriminal")
     const {laporan, setLaporan} = useLaporan()
     const [files, setFiles] = useState<File[]>([]);
+    const [judul, setJudul] = useState<string>("")
     const [namaPelapor, setNamaPelapor] = useState<string>("")
     const [jenisTindakan, setJenisTindakan] = useState<string>("")
     const [waktuKejadian, setWaktuKejadian] = useState<string>("")
@@ -75,6 +76,7 @@ const LaporanSection = () => {
     useEffect(() => {
         setPosition(laporan?.jenisTindakan ?? "Pilih Jenis Tindakan Kriminal")
         if(laporan){
+          setJudul(laporan.judul)
           setNamaPelapor(laporan?.namaPelapor )
           setJenisTindakan(laporan?.jenisTindakan)
           setWaktuKejadian(laporan?.waktuKejadian)
@@ -105,7 +107,7 @@ const LaporanSection = () => {
     const buatLaporan = async () => {
       
       await uploadReport({
-        judul: 'MENARI-NARI',
+        judul: judul,
         namaPelapor: namaPelapor,
         jenisTindakan: jenisTindakan,
         waktuKejadian: waktuKejadian,
@@ -134,21 +136,14 @@ const LaporanSection = () => {
     })
     }
 
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            if (typeof reader.result === 'string') {
-            setImage(reader.result);
-            }
-        };
-        reader.readAsDataURL(file);
-        }
-    };
-
     return <div className="flex flex-col w-full">
     <div className="flex flex-col w-full mt-8 space-y-4 mb-4">
+      <div className="w-full flex flex-col space-y-1">
+            <label className="text-lg text-black font-semibold">Judul Laporan</label>
+            <input placeholder="Tulis judul laporan"
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md" value={judul}
+            onChange={(e) => setJudul(e.target.value)}/>
+        </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Nama Pelapor</label>
             <input placeholder="Tulis nama lengkap Anda"
