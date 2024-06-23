@@ -1,4 +1,5 @@
 export interface Laporan {
+  _id?: string;
   namaPelapor: string;
   jenisTindakan: string;
   judul: string;

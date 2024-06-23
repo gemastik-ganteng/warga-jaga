@@ -96,11 +96,14 @@ const LaporanSection = () => {
     useEffect(()=>{
         if(laporan){
             const buktibukti = laporan.bukti;
-            const nwFiles: File[] = [];
-            for(const bukti of buktibukti){
-                nwFiles.push(convertBase64ToFile(bukti))
+            if(buktibukti){
+              const nwFiles: File[] = [];
+              for(const bukti of buktibukti){
+                  nwFiles.push(convertBase64ToFile(bukti))
+              }
+              setFiles(nwFiles)
             }
-            setFiles(nwFiles)
+            
         }
     }, [laporan]);
 

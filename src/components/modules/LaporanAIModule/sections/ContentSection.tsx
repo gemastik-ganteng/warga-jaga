@@ -48,7 +48,7 @@ const LaporanAIContentSection = () => {
         }
     }
     
-    return <div className="grow flex flex-col justify-between p-8">
+    return <div className="grow flex flex-col justify-between p-8 max-w-xl mx-auto">
         <div>
             <div className="text-sm text-center">
                 Yuk, Masukan bukti-bukti agar kami mengetahui konteks laporan

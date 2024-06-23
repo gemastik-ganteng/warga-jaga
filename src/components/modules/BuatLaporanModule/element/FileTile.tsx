@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
-import React from 'react';
-import { RiFileTextLine, RiImageLine, RiVideoLine, RiMusic2Line } from 'react-icons/ri'; // Import ikon-ikon yang digunakan
+import React from 'react'; // Import ikon-ikon yang digunakan
 
 type FileTileProps = {
     file: File;

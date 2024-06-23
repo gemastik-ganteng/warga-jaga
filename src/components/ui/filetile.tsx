@@ -1,11 +1,7 @@
-import { Button } from '@/components/ui/button';
 import React from 'react';
-import { RiFileTextLine, RiImageLine, RiVideoLine, RiMusic2Line } from 'react-icons/ri'; // Import ikon-ikon yang digunakan
-
 type FileTileProps = {
     file: File;
 }
-
 const getFileIcon = (fileType: string): JSX.Element => {
     switch (fileType) {
         case 'image':
@@ -28,7 +24,9 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
         if (file.type.startsWith('image')) {
             return <img className='w-full aspect-square' src={URL.createObjectURL(file)} alt="Preview" />;
         } else if (file.type.startsWith('video')) {
-            return <video className='w-full aspect-square' controls><source src={URL.createObjectURL(file)} type={file.type} /></video>;
+            return <video className='w-full aspect-square' controls><source src={URL.createObjectURL(file)} type={file.type} />
+            Your browser does not support the video tag.
+            </video>;
         } else {
             return <div className='flex items-center justify-center w-full p-4'>
             </div>; // Ikon dokumen untuk tipe file yang tidak dikenal
