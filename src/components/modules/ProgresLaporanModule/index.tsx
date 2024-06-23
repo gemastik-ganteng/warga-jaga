@@ -7,10 +7,12 @@ import AuthorityProfileSection from "./sections/AuthorityProfileSection"
 const ProgresLaporanModule = () => {
     return <div className="flex flex-col w-screen min-h-screen bg-[#EBF8FE] p-4">
         <HeaderSection/>
-        <DescriptionSection/>
-        <DokumenPendukungSection/>
-        <StatusLaporanSection/>
-        <AuthorityProfileSection/>
+        <div className="flex flex-col max-w-xl mx-auto w-full">
+          <DescriptionSection/>
+          <DokumenPendukungSection/>
+          <StatusLaporanSection/>
+          <AuthorityProfileSection/>
+        </div>
     </div>
 }
 
