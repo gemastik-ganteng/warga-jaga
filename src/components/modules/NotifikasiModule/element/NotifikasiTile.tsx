@@ -24,7 +24,7 @@ const NotifikasiTile = ({ title, dataNotifikasi }: NotifikasiTileProps) => {
                   <p className="text-sm font-bold">{data.tanggal}</p>
                   <p className="text-sm font-bold text-black">{data.jam}</p>
                 </div>
-                <p className="text-xs">{data.deskripsi}</p>
+                <p className="text-xs text-start">{data.deskripsi}</p>
               </div>
             </Card>
           );

@@ -7,7 +7,7 @@ const BahasaSection = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center mx-4 mt-6">
+      <div className="flex flex-col items-center mx-4 mt-6 w-full">
         <div className="text-center w-full bg-[#EBF8FE] py-2 rounded-md">
           <p className="text-xl font-semibold">Pilih Bahasa</p>
         </div>

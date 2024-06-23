@@ -7,7 +7,7 @@ const ProfileSection = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center mx-4">
+      <div className="flex flex-col items-center mx-4 w-full">
         <PhotoProfileTile />
         <div className="w-full flex flex-col mt-4 gap-3">
           <ProfileInfoTile value="Miraloves@gmail.com" src="./envelope.svg"/>

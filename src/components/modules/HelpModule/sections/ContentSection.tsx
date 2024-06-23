@@ -50,7 +50,7 @@ const ContentSection = () => {
         };
     }, [handleSearch]);
 
-    return <div className="flex flex-col space-y-5">
+    return <div className="flex flex-col space-y-5 md:mt-2 md:space-y-6 w-full">
         <div className="w-full flex flex-col pt-1">
             <Stack>
                 <input

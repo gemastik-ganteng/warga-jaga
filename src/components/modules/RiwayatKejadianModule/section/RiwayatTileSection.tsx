@@ -107,7 +107,7 @@ const RiwayatTileSection = () => {
               Filter
             </button>
           </div>
-          <div className="flex flex-col w-full items-center space-y-3 mt-4">
+          <div className="flex flex-col w-full items-center space-y-3 mt-4 md:mt-6 md:space-y-4">
             {riwayatKejadian.length === 0 && (
               <p className="text-center text-lg text-gray-500">
                 Tidak ada data yang ditemukan
