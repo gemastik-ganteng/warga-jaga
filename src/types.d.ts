@@ -6,7 +6,9 @@ export interface Laporan {
   tanggalKejadian: string;
   lokasiKejadian: string;
   deskripsiKejadian: string;
-  bukti: Bukti[];
+  bukti?: Bukti[];
+  deskripsi?: string;
+  files?: string[];
 }
 
 export interface Bukti {
