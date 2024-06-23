@@ -30,8 +30,8 @@ const laporanSayaList: LaporanSayaTileInformation[] = [
 const ContentSection = ()=> {
     const router = useRouter()
     return <div className="flex flex-col w-full text-xl font-medium items-center mt-6 px-4">
-        <h1 className="font-semibold mb-4">Riwayat Laporan</h1>
-        <div className="flex flex-col w-full items-center space-y-2">
+        <h1 className="font-semibold mb-4 md:font-bold md:text-2xl md:mt-4">Riwayat Laporan</h1>
+        <div className="flex flex-col w-full items-center space-y-2 md:space-y-3 md:mt-2">
             {
                 laporanSayaList.map((data, index)=>{
                     return (

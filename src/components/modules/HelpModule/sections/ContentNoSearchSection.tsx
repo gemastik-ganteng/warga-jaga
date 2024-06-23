@@ -12,12 +12,12 @@ interface QNA {
 }
 
 const ContentNoSearchSection = ({QnAList}: {QnAList: QNA[]}) => {
-    return <div className="flex flex-col space-y-1">
+    return <div className="flex flex-col space-y-1 md:mt-2">
         <div className="mx-auto text-xl font-semibold">Pertanyaan Populer</div>
 
-        <div className="w-full px-2 space-y-2">
-            {QnAList.filter((QnA: QNA) => QnA.top).map((QnA) => {
-                return <Accordion type="multiple" className=" border-2 bg-sky-100 border-slate-400 rounded-sm px-2 h-fit">
+        <div className="w-full px-2 space-y-2 md:space-y-3">
+            {QnAList.filter((QnA: QNA) => QnA.top).map((QnA, index) => {
+                return <Accordion type="multiple" className=" border-2 bg-sky-100 border-slate-400 rounded-sm px-2 h-fit" key={index}>
                     <AccordionItem value={`item-1`} className="">
                     <AccordionTrigger className="text-sm font-normal text-justify text-cyan-600">{QnA.question}</AccordionTrigger>
                     <AccordionContent>

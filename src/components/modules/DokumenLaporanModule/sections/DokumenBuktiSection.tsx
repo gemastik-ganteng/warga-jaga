@@ -21,12 +21,12 @@ const documents = [
 
 
 const DokumenBuktiSection = () => {
-    return     <div className="flex flex-col mt-4 space-y-2">
+    return     <div className="flex flex-col mt-4 space-y-2 w-full md:mt-8">
         <div className="text-xl justify-start font-medium px-4">Obtained Documents</div>
 
         <Accordion type="multiple" className="w-full bg-white border-2 border-blue-100 rounded-md p-2">
             {documents.map((document, index) => {
-                return <AccordionItem value={`item-${index}`}>
+                return <AccordionItem value={`item-${index}`} key={index}>
                     <AccordionTrigger>{document.title}</AccordionTrigger>
                     <AccordionContent>
                         <div className="flex flex-col space-y-3">

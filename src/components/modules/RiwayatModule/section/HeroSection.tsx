@@ -7,7 +7,7 @@ const HeroSection = () => {
   return (
     <>
       <div className="flex flex-col w-full bg-[#EBF8FE]">
-        <div className="felx flex-col w-full px-5 py-2">
+        <div className="felx flex-col justify-center w-full px-5 py-2 md:py-6 md:px-8">
           <div className="flex flex-col gap-1">
             <h2 className="text-2xl font-extrabold">Lokasi Saat Ini</h2>
             <h4 className="text-lg">Depok, Jawa Barat</h4>
@@ -23,8 +23,8 @@ const HeroSection = () => {
             </Stack>
           </div>
 
-          <div className="rounded-md w-full pt-2">
-            <Image src="/maps.png" alt="gambar maps" height={700} width={700} />
+          <div className="rounded-md w-full flex justify-center pt-2 md:pt-6">
+            <Image src="/maps.png" alt="gambar maps" height={800} width={800} />
           </div>
         </div>
       </div>
