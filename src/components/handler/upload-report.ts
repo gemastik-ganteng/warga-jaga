@@ -5,11 +5,21 @@ import axios from "axios";
 export const uploadReport = async (report: Laporan, files: File[], user: UserData) => {
     try {
       const formData = new FormData();
+
+      // const objSend = {
+      //   jenisTindakan: report.jenisTindakan,
+      //   lokasiKejadian: report.lokasiKejadian,
+      //   waktuKejadian: report.waktuKejadian,
+      //   tanggalKejadian: report.tanggalKejadian,
+      //   judul: report.judul,
+      //   deskripsiKejadian: report.deskripsiKejadian,
+      //   email: user.email,
+      //   files
+      // }
   
       // Append report data to FormData
       formData.append('email', user.email)
       formData.append('judul', report.judul);
-      formData.append('namaPelapor', report.namaPelapor);
       formData.append('jenisTindakan', report.jenisTindakan);
       formData.append('waktuKejadian', report.waktuKejadian);
       formData.append('tanggalKejadian', report.tanggalKejadian);
@@ -20,13 +30,11 @@ export const uploadReport = async (report: Laporan, files: File[], user: UserDat
       files.forEach((file, index) => {
         formData.append(`files[${index}]`, file);
       });
+
+      console.log(formData)
   
       // Make POST request to your Express API endpoint
-      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+'/reports', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL+'/reports', formData);
   
       // Handle success if needed
       console.log('Report uploaded successfully');

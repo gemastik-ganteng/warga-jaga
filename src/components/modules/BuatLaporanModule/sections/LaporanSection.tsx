@@ -103,6 +103,7 @@ const LaporanSection = () => {
     }, [laporan]);
 
     const buatLaporan = async () => {
+      
       await uploadReport({
         judul: 'MENARI-NARI',
         namaPelapor: namaPelapor,
