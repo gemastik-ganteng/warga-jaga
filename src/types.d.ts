@@ -1,6 +1,7 @@
 export interface Laporan {
   namaPelapor: string;
   jenisTindakan: string;
+  judul: string;
   waktuKejadian: string;
   tanggalKejadian: string;
   lokasiKejadian: string;

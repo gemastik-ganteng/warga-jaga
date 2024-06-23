@@ -13,13 +13,17 @@ import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 
 
-export default function SubmitLaporanElement(){
+type SubmitLaporanElementProps = {
+	onClick: ()=> void
+}
+
+const SubmitLaporanElement: React.FC<SubmitLaporanElementProps> = ({onClick})=> {
 	const router = useRouter();
 
     return     (
     <AlertDialog>
 			<AlertDialogTrigger asChild>
-				<Button>Kirim </Button>
+				<Button onClick={onClick}>Kirim </Button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="px-1 bg-[#EBF8FE]">
 				<AlertDialogHeader>
@@ -43,3 +47,5 @@ export default function SubmitLaporanElement(){
   	</AlertDialog>
 		)
 }
+
+export default SubmitLaporanElement

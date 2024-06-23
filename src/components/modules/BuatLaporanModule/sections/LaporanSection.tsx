@@ -40,6 +40,9 @@ import { toast } from "@/components/ui/use-toast"
 import { useLaporan } from "@/components/context/LaporanContext"
 import FileTile from "../element/FileTile"
 import { convertBase64ToFile } from "@/utility/FileService"
+import { uploadReport } from "@/components/handler/upload-report"
+import { useAuth } from "@/components/context/AuthContext"
+import { useRouter } from "next/navigation"
 
 const FormSchema = z.object({
     dob: z.date({
@@ -52,24 +55,33 @@ const LaporanSection = () => {
     const [position, setPosition] = useState<string | undefined>("Pilih Jenis Tindakan Kriminal")
     const {laporan, setLaporan} = useLaporan()
     const [files, setFiles] = useState<File[]>([]);
-    const [namaPelapor, setNamaPelapor] = useState(laporan?.namaPelapor)
-    const [jenisTindakan, setJenisTindakan] = useState(laporan?.jenisTindakan)
-    const [waktuKejadian, setWaktuKejadian] = useState(laporan?.waktuKejadian)
-    const [tanggalKejadian, setTanggalKejadian] = useState(laporan?.tanggalKejadian)
-    const [lokasiKejadian, setLokasiKejadian] = useState(laporan?.lokasiKejadian)
-    const [deskripsiKejadian, setDeskripsiKejadian] = useState(laporan?.deskripsiKejadian)
-    const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
+    const [namaPelapor, setNamaPelapor] = useState<string>("")
+    const [jenisTindakan, setJenisTindakan] = useState<string>("")
+    const [waktuKejadian, setWaktuKejadian] = useState<string>("")
+    const [tanggalKejadian, setTanggalKejadian] = useState<string>("")
+    const [lokasiKejadian, setLokasiKejadian] = useState<string>("")
+    const [deskripsiKejadian, setDeskripsiKejadian] = useState<string>("")
+    const {userData, loading} = useAuth()
+    const router = useRouter();
+
+    useEffect(()=>{
+      console.log(userData)
+      if(!userData && !loading){
+         router.push("/login")
+      }
+  },[userData, loading])
+
 
     useEffect(() => {
         setPosition(laporan?.jenisTindakan ?? "Pilih Jenis Tindakan Kriminal")
-        setNamaPelapor(laporan?.namaPelapor)
-        setJenisTindakan(laporan?.jenisTindakan)
-        setWaktuKejadian(laporan?.waktuKejadian)
-        setTanggalKejadian(laporan?.tanggalKejadian)
-        setLokasiKejadian(laporan?.lokasiKejadian)
-        setDeskripsiKejadian(laporan?.deskripsiKejadian)
-
-        console.log(laporan?.tanggalKejadian)
+        if(laporan){
+          setNamaPelapor(laporan?.namaPelapor )
+          setJenisTindakan(laporan?.jenisTindakan)
+          setWaktuKejadian(laporan?.waktuKejadian)
+          setTanggalKejadian(laporan?.tanggalKejadian)
+          setLokasiKejadian(laporan?.lokasiKejadian)
+          setDeskripsiKejadian(laporan?.deskripsiKejadian)
+        }
     },[laporan])
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,6 +101,19 @@ const LaporanSection = () => {
             setFiles(nwFiles)
         }
     }, [laporan]);
+
+    const buatLaporan = async () => {
+      await uploadReport({
+        judul: 'MENARI-NARI',
+        namaPelapor: namaPelapor,
+        jenisTindakan: jenisTindakan,
+        waktuKejadian: waktuKejadian,
+        tanggalKejadian: tanggalKejadian,
+        lokasiKejadian: lokasiKejadian,
+        deskripsiKejadian: deskripsiKejadian,
+        bukti: []
+      }, files, userData!)
+    } 
 
     const form = useForm<z.infer<typeof FormSchema>>({
       resolver: zodResolver(FormSchema),
@@ -270,7 +295,7 @@ const LaporanSection = () => {
         </div>
 
     </div>
-        <SubmitLaporanElement/>
+        <SubmitLaporanElement onClick={buatLaporan}/>
     </div>
 }
 
