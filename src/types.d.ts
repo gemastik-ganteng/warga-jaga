@@ -26,3 +26,10 @@ export interface RegisterRequestDTO {
   email: string,
   phone: string
 }
+
+export interface UserData {
+  email: string,
+  name: string,
+  phone: string,
+  role: 'Warga' | 'Pemerintah'
+}

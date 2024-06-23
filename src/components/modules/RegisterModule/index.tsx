@@ -56,7 +56,6 @@ export default function RegisterSection() {
                             otp, email
                         }
                         await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/verify-otp", verifyOTPData); 
-                        console.log("BOKEP")
                         navigateTo('INTRO_VERIFIKASI_KTP')}
                     }/>
                 </div>

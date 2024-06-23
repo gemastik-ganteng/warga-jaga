@@ -1,5 +1,7 @@
 "use client"
+import { useAuth } from "@/components/context/AuthContext";
 import Stack from "@/components/elements/Stack";
+import { UserData } from "@/types";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -8,17 +10,25 @@ const LoginBoxSection = ()=> {
 
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const {login} = useAuth();
 
     const router = useRouter();
 
     const handleLogin = async () => {
         try{
-            const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/login", {username: email, password}); 
-            console.log(res)
+            const res = await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL +"/auth/login", {username: email, password});
+            const user: UserData = {
+                name: res.data.user.name,
+                email: res.data.user.email,
+                phone: res.data.user.phone,
+                role: res.data.user.role
+            }
+            login(user)
+            console.log(res.data)
             router.push("/")
         }
         catch(error){
-            router.push("/login")
+            alert("email atau password tidak sesuai")
         }
     }
 
