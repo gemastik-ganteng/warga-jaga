@@ -2,7 +2,7 @@ import Stack from "@/components/elements/Stack";
 import Image from "next/image";
 
 interface ProfileInfoTileProps {
-  value: string;
+  value: string | undefined;
   src: string;
   placeholder?: string;
   password?: boolean;
@@ -24,7 +24,7 @@ const ProfileInfoTile = ({
           type={password ? "password" : "text"}
           placeholder={placeholder}
           className="w-full text-black border-2 pl-11 py-3 border-blue-400 rounded-md font-semibold placeholder:text-black"
-          value={value}
+          value={value ?? "Anonymous"}
           onChange={(e) => onchange && onchange(e.target.value)}
         />
         <Image
