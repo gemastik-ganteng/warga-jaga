@@ -78,7 +78,7 @@ const RiwayatTileSection = () => {
         )
       );
     } else {
-      setRiwayatKejadian(riwayatReal!);
+      setRiwayatKejadian(riwayatReal || []);
     }
   }, 300);
 

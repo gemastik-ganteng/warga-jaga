@@ -45,7 +45,7 @@ const FileTile: React.FC<FileTileProps> = ({ file }) => {
                 {renderPreview()}
                 </div>
                 <div className=''>
-                <p>Nama File: {file.name}</p>
+                <p>{file.name}</p>
                 <p>Tipe File: {file.type}</p>
                 <p>Ukuran File: {file.size} bytes</p>
                 </div>

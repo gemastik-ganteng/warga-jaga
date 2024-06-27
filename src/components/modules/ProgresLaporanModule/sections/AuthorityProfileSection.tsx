@@ -9,7 +9,7 @@ const authorityProfiles = [
 ]
 
 const AuthorityProfileSection = () => {
-    return <div className="flex flex-col p-4 mt-3">
+    return <div className="flex flex-col p-4 mt-3 max-w-xl mx-auto w-full">
         <div className="text-xl justify-center mx-auto">Authority Profile</div>
 
         <div className="h-16 flex border-2 border-blue-400 rounded-sm">

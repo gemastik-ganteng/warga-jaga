@@ -25,13 +25,13 @@ const LaporanAIContentSection = () => {
         const bukti = await Promise.all(buktiPromises);
 
         const newLaporan: Laporan = {
-            judul: "Pencurian Motor Terekam CCTV di Ciputat Center",
-            namaPelapor: "Isa Citra Buana",
+            judul: "Pencurian Mobil di Kukusan teknik",
+            namaPelapor: "Adrian Hamzah",
             jenisTindakan: "Pencurian",
             waktuKejadian: "07:54",
-            tanggalKejadian: "19 April 2018",
-            lokasiKejadian: "Tidak diketahui (perlu informasi lebih lanjut)",
-            deskripsiKejadian: "Rekaman CCTV menunjukkan seorang pria berpakaian putih dan bertopi sedang mencuri sepeda motor yang terparkir. Kejadian terekam pada tanggal dan waktu yang tertera di video CCTV.",
+            tanggalKejadian: "20 April 2024",
+            lokasiKejadian: "Depok",
+            deskripsiKejadian: "Rekaman CCTV menunjukkan seorang pria berpakaian putih dan bertopi sedang mencuri Mobil yang terparkir. Kejadian terekam pada tanggal dan waktu yang tertera di video CCTV.",
             bukti
         };
 

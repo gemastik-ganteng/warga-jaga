@@ -15,7 +15,7 @@ const BuktiSection: React.FC<buktiSectionProps> = ({base64List}) => {
                 file={convertBase64ToFile({
                     type: getFileType(data),
                     base64: data,
-                    name: 'Bukti '+ index
+                    name: 'Bukti '+ (index+1)
                 })}/>
             })
         }

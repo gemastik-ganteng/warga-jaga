@@ -71,7 +71,7 @@ const ContentSection = ()=> {
                                         <h1 className="text-xs text-[#2653C7]">{`${data.tanggalKejadian} (Pukul ${data.waktuKejadian})`}</h1>
                                     </div>
                                     <Button className="my-auto  rounded-full text-white text-center bg-[#2653C7] px-4 py-1 text-xs"
-                                        onClick={() => router.push("progres-laporan/1")}>Cek Berkas</Button>
+                                        onClick={() => router.push(`progres-laporan/${data._id}`)}>Cek Berkas</Button>
                                 </div>
                                 </div>
                             </Card>
