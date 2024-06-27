@@ -12,10 +12,12 @@ export const uploadReport = async (report: Laporan, files: File[], user: UserDat
     // Wait for all Base64 promises to resolve
     const base64strFiles = await Promise.all(base64Promises);
 
+    console.log("RP", report)
+
     const dataDikirim = {
       email: user.email,
       judul: report.judul,
-      jenisTindakan: report.jenisTindakan,
+      jenisKejahatan: report.jenisTindakan,
       waktuKejadian: report.waktuKejadian,
       tanggalKejadian: report.tanggalKejadian,
       lokasiKejadian: report.lokasiKejadian,
@@ -23,6 +25,8 @@ export const uploadReport = async (report: Laporan, files: File[], user: UserDat
       base64strFiles: base64strFiles,
       namaPelapor: report.namaPelapor,
     };
+
+    console.log("::", dataDikirim)
 
     console.log(dataDikirim);
 

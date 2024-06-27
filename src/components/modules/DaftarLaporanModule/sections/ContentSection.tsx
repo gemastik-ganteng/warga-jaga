@@ -80,7 +80,7 @@ const ContentSection = () => {
                   setSearch(e.target.value);
                   handleSearch();
                 }}
-                placeholder="Cari lokasi lain ..."
+                placeholder="Cari Lokasi Lain ..."
                 className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md flex"
                 value={search}
               />

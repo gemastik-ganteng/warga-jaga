@@ -25,13 +25,13 @@ const LaporanAIContentSection = () => {
         const bukti = await Promise.all(buktiPromises);
 
         const newLaporan: Laporan = {
-            judul: "Penculikan Mr Y",
-            namaPelapor: "Mira Setiawan",
-            jenisTindakan: "Penculikan",
-            waktuKejadian: "12.30",
-            tanggalKejadian: "12 Oktober 2023",
-            lokasiKejadian: "Depok",
-            deskripsiKejadian: "Ada penculikan, tolong diusut ya",
+            judul: "Pencurian Motor Terekam CCTV di Ciputat Center",
+            namaPelapor: "Isa Citra Buana",
+            jenisTindakan: "Pencurian",
+            waktuKejadian: "07:54",
+            tanggalKejadian: "19 April 2018",
+            lokasiKejadian: "Tidak diketahui (perlu informasi lebih lanjut)",
+            deskripsiKejadian: "Rekaman CCTV menunjukkan seorang pria berpakaian putih dan bertopi sedang mencuri sepeda motor yang terparkir. Kejadian terekam pada tanggal dan waktu yang tertera di video CCTV.",
             bukti
         };
 
@@ -94,7 +94,7 @@ const LaporanAIContentSection = () => {
                         <h1 className="text-black text-sm text-center mx-auto">Belum ada bukti. Mohon Upload Bukti Kejadian</h1>
                     </div>
                 }
-                <div className="flex flex-col items-center space-y-2">
+                <div className="flex flex-col items-center space-y-2 w-full">
                     {
                         files.map((data, index)=> {
                             return <FileTile 

@@ -3,7 +3,7 @@ import { usePathname } from "next/navigation"
 
 const Navbar = () => {
     const pathname = usePathname()
-    return <div className="w-full flex items-center min-h-16  px-4 fixed bottom-3 left-0">
+    return <div className="w-full flex items-center min-h-16  px-4 fixed bottom-3 left-0 z-50">
         <div className="w-full max-w-xl mx-auto flex h-full rounded-lg p-4 bg-[#99AEE4] justify-around shadow-md">
 
         <a href="/"><svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -8,7 +8,7 @@ type buktiSectionProps = {
 }
 
 const BuktiSection: React.FC<buktiSectionProps> = ({base64List}) => {
-    return <div className="flex flex-col gap-4">
+    return <div className="flex flex-col gap-4 w-full">
         {
             base64List.map((data,index)=> {
                 return <FileTile key={index+"bukti"} 

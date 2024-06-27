@@ -108,11 +108,13 @@ const LaporanSection = () => {
     }, [laporan]);
 
     const buatLaporan = async () => {
+      console.log("pos:",position)
+      console.log("HISDKJba")
       
       await uploadReport({
         judul: judul,
         namaPelapor: namaPelapor,
-        jenisTindakan: jenisTindakan,
+        jenisTindakan: position!,
         waktuKejadian: waktuKejadian,
         tanggalKejadian: tanggalKejadian,
         lokasiKejadian: lokasiKejadian,
@@ -200,13 +202,13 @@ const LaporanSection = () => {
                         variant={"outline"}
                         className={cn(
                           "pl-3 text-left font-normal w-full border-blue-400 border-2 rounded-md justify-start",
-                          !field.value && "text-muted-foreground"
+                          !tanggalKejadian && "text-muted-foreground"
                         )}
                       >
                         <div className="flex items-center space-x-4 justify-start">
                           <CalendarIcon className="h-4 w-4 opacity-50" />
-                          {field.value ? (
-                            <span>{format(field.value, "PPP")}</span>
+                          {tanggalKejadian ? (
+                            <span>{format(tanggalKejadian, "PPP")}</span>
                           ) : (
                             <span className="text-gray-400">Pilih Tanggal Kejadian</span>
                           )}
@@ -219,6 +221,7 @@ const LaporanSection = () => {
                       mode="single"
                       selected={tanggalKejadian? new Date() : new Date(tanggalKejadian)}
                       onSelect={(date)=> {
+                        // console.log("--> ", date)
                         if(date){
                           setTanggalKejadian(date.toDateString())
                         }
@@ -282,7 +285,7 @@ const LaporanSection = () => {
                         <h1 className="text-black text-sm text-center mx-auto">Belum ada bukti. Mohon Upload Bukti Kejadian</h1>
                     </div>
                 }
-                <div className="flex flex-col items-center space-y-2">
+                <div className="flex flex-col items-center space-y-2 w-full">
                     {
                         files.map((data, index)=> {
                             return <FileTile 
