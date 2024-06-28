@@ -35,7 +35,7 @@ const AuthorityProfileSection = () => {
 
         <div className="mt-5 h-60 flex flex-col border-2 border-blue-400 rounded-sm space-y-3 p-3">
             {authorityProfiles.map((authorityProfile) => {
-                return <div className="flex flex-col space-y-1">
+                return <div className="flex flex-col space-y-1" key={authorityProfile.key}>
                     <div className="text-sm mt-1 font-medium">{authorityProfile.key}</div>
                     <div className="mt-[2px] h-8 w-full bg-blue-400 rounded-md flex justify-center items-center text-white font-semibold">{authorityProfile.value}</div>
                 </div>

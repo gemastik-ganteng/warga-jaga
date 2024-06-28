@@ -25,14 +25,15 @@ const LaporanAIContentSection = () => {
         const bukti = await Promise.all(buktiPromises);
 
         const newLaporan: Laporan = {
-            judul: "Pencurian Motor di Wisma Terrace",
-            namaPelapor: "Isa Citra",
+            judul: "Pencurian Motor di Wisma Zaenab Kukusan",
+            namaPelapor: "Adrian Hamzah",
             jenisTindakan: "Pencurian",
             waktuKejadian: "00.25",
             tanggalKejadian: "28 Juni 2024",
             lokasiKejadian: "Kukusan, Depok",
             deskripsiKejadian: `Pada pukul 16:29 terlihat 2 orang yang mencoba untuk mengambil motor scoopy. Rekaman CCTV menunjukkan seorang pria berpakaian putih dan bertopi sedang mencuri Motor berwarna merah yang terparkir di dekat got. Kejadian terekam pada tanggal dan waktu yang tertera di video CCTV. Pelaku menggunakan helm berwarna merah, berbaju abu abu. Pelaku memiliki postur tubuh yang cukup kecil.
-Pelaku dengan hoodie berwarna merah terlihat membawa motor keluar dari rumah. Pelaku mengenakan celana jeans berwarna biru, dibantu oleh satu orang komplotan dengan postur tubuh kecil. Komplotan pelaku mengenakan baju hitam dan celana hitam. `,
+Pelaku dengan hoodie berwarna merah terlihat membawa motor keluar dari rumah. Pelaku mengenakan celana jeans berwarna biru, dibantu oleh satu orang komplotan dengan postur tubuh kecil. Komplotan pelaku mengenakan baju hitam dan celana hitam. ,
+            bukti`,
             bukti
         };
 

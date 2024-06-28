@@ -25,7 +25,8 @@ const LoginBoxSection = ()=> {
             }
             login(user)
             console.log(res.data)
-            router.push("/")
+            if (email == "akunpolisi@gmail.com") router.push("/daftar-laporan") 
+            else router.push("/")
         }
         catch(error){
             alert("email atau password tidak sesuai")
