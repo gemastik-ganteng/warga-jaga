@@ -249,7 +249,7 @@ const LaporanSection = () => {
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Deskripsi</label>
             <textarea placeholder="Ceritakan kejadian dengan rinci" 
-            className="h-20 w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
+            className="h-28 w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
             value={deskripsiKejadian} onChange={(e) => {setDeskripsiKejadian(e.target.value)}}/>
         </div>
         
