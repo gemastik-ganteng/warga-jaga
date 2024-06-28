@@ -4,4 +4,4 @@ const DaftarLaporanPage = () => {
     return <DaftarLaporanModule/>
 }
 
-export default DaftarLaporanModule
+export default DaftarLaporanPage

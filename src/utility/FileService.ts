@@ -19,3 +19,18 @@ export const convertBase64ToFile = (bukti: Bukti): File => {
     const blob = new Blob([ab], { type: bukti.type });
     return new File([blob], bukti.name, { type: bukti.type });
 };
+
+export const getFileType = (base64: string): string => {
+    // Extracting the MIME type from the base64 data
+    const mimePattern = /^data:([a-zA-Z0-9]+\/[a-zA-Z0-9-.+]+).*,/;
+    const match = base64.match(mimePattern);
+
+    if (match && match[1]) {
+        const mimeType = match[1].toLowerCase();
+        console.log(mimeType)
+        return mimeType;
+    }
+
+    // Default to 'application/octet-stream' if type cannot be determined
+    return 'application/octet-stream';
+};

@@ -40,6 +40,9 @@ import { toast } from "@/components/ui/use-toast"
 import { useLaporan } from "@/components/context/LaporanContext"
 import FileTile from "../element/FileTile"
 import { convertBase64ToFile } from "@/utility/FileService"
+import { uploadReport } from "@/components/handler/upload-report"
+import { useAuth } from "@/components/context/AuthContext"
+import { useRouter } from "next/navigation"
 
 const FormSchema = z.object({
     dob: z.date({
@@ -52,24 +55,35 @@ const LaporanSection = () => {
     const [position, setPosition] = useState<string | undefined>("Pilih Jenis Tindakan Kriminal")
     const {laporan, setLaporan} = useLaporan()
     const [files, setFiles] = useState<File[]>([]);
-    const [namaPelapor, setNamaPelapor] = useState(laporan?.namaPelapor)
-    const [jenisTindakan, setJenisTindakan] = useState(laporan?.jenisTindakan)
-    const [waktuKejadian, setWaktuKejadian] = useState(laporan?.waktuKejadian)
-    const [tanggalKejadian, setTanggalKejadian] = useState(laporan?.tanggalKejadian)
-    const [lokasiKejadian, setLokasiKejadian] = useState(laporan?.lokasiKejadian)
-    const [deskripsiKejadian, setDeskripsiKejadian] = useState(laporan?.deskripsiKejadian)
-    const [buktiKejadian, setBuktiKejadian] = useState(laporan?.bukti[0])
+    const [judul, setJudul] = useState<string>("")
+    const [namaPelapor, setNamaPelapor] = useState<string>("")
+    const [jenisTindakan, setJenisTindakan] = useState<string>("")
+    const [waktuKejadian, setWaktuKejadian] = useState<string>("")
+    const [tanggalKejadian, setTanggalKejadian] = useState<string>("")
+    const [lokasiKejadian, setLokasiKejadian] = useState<string>("")
+    const [deskripsiKejadian, setDeskripsiKejadian] = useState<string>("")
+    const {userData, loading} = useAuth()
+    const router = useRouter();
+
+    useEffect(()=>{
+      console.log(userData)
+      if(!userData && !loading){
+         router.push("/login")
+      }
+  },[userData, loading])
+
 
     useEffect(() => {
         setPosition(laporan?.jenisTindakan ?? "Pilih Jenis Tindakan Kriminal")
-        setNamaPelapor(laporan?.namaPelapor)
-        setJenisTindakan(laporan?.jenisTindakan)
-        setWaktuKejadian(laporan?.waktuKejadian)
-        setTanggalKejadian(laporan?.tanggalKejadian)
-        setLokasiKejadian(laporan?.lokasiKejadian)
-        setDeskripsiKejadian(laporan?.deskripsiKejadian)
-
-        console.log(laporan?.tanggalKejadian)
+        if(laporan){
+          setJudul(laporan.judul)
+          setNamaPelapor(laporan?.namaPelapor )
+          setJenisTindakan(laporan?.jenisTindakan)
+          setWaktuKejadian(laporan?.waktuKejadian)
+          setTanggalKejadian(laporan?.tanggalKejadian)
+          setLokasiKejadian(laporan?.lokasiKejadian)
+          setDeskripsiKejadian(laporan?.deskripsiKejadian)
+        }
     },[laporan])
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,13 +96,32 @@ const LaporanSection = () => {
     useEffect(()=>{
         if(laporan){
             const buktibukti = laporan.bukti;
-            const nwFiles: File[] = [];
-            for(const bukti of buktibukti){
-                nwFiles.push(convertBase64ToFile(bukti))
+            if(buktibukti){
+              const nwFiles: File[] = [];
+              for(const bukti of buktibukti){
+                  nwFiles.push(convertBase64ToFile(bukti))
+              }
+              setFiles(nwFiles)
             }
-            setFiles(nwFiles)
+            
         }
     }, [laporan]);
+
+    const buatLaporan = async () => {
+      console.log("pos:",position)
+      console.log("HISDKJba")
+      
+      await uploadReport({
+        judul: judul,
+        namaPelapor: namaPelapor,
+        jenisTindakan: position!,
+        waktuKejadian: waktuKejadian,
+        tanggalKejadian: tanggalKejadian,
+        lokasiKejadian: lokasiKejadian,
+        deskripsiKejadian: deskripsiKejadian,
+        bukti: []
+      }, files, userData!)
+    } 
 
     const form = useForm<z.infer<typeof FormSchema>>({
       resolver: zodResolver(FormSchema),
@@ -108,21 +141,14 @@ const LaporanSection = () => {
     })
     }
 
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            if (typeof reader.result === 'string') {
-            setImage(reader.result);
-            }
-        };
-        reader.readAsDataURL(file);
-        }
-    };
-
     return <div className="flex flex-col w-full">
     <div className="flex flex-col w-full mt-8 space-y-4 mb-4">
+      <div className="w-full flex flex-col space-y-1">
+            <label className="text-lg text-black font-semibold">Judul Laporan</label>
+            <input placeholder="Tulis judul laporan"
+            className="w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md" value={judul}
+            onChange={(e) => setJudul(e.target.value)}/>
+        </div>
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Nama Pelapor</label>
             <input placeholder="Tulis nama lengkap Anda"
@@ -176,13 +202,13 @@ const LaporanSection = () => {
                         variant={"outline"}
                         className={cn(
                           "pl-3 text-left font-normal w-full border-blue-400 border-2 rounded-md justify-start",
-                          !field.value && "text-muted-foreground"
+                          !tanggalKejadian && "text-muted-foreground"
                         )}
                       >
                         <div className="flex items-center space-x-4 justify-start">
                           <CalendarIcon className="h-4 w-4 opacity-50" />
-                          {field.value ? (
-                            <span>{format(field.value, "PPP")}</span>
+                          {tanggalKejadian ? (
+                            <span>{format(tanggalKejadian, "PPP")}</span>
                           ) : (
                             <span className="text-gray-400">Pilih Tanggal Kejadian</span>
                           )}
@@ -193,8 +219,13 @@ const LaporanSection = () => {
                   <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                       mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
+                      selected={tanggalKejadian? new Date() : new Date(tanggalKejadian)}
+                      onSelect={(date)=> {
+                        // console.log("--> ", date)
+                        if(date){
+                          setTanggalKejadian(date.toDateString())
+                        }
+                        }}
                       disabled={(date) =>
                         date > new Date() || date < new Date("1900-01-01")
                       }
@@ -218,7 +249,7 @@ const LaporanSection = () => {
         <div className="w-full flex flex-col space-y-1">
             <label className="text-lg text-black font-semibold">Deskripsi</label>
             <textarea placeholder="Ceritakan kejadian dengan rinci" 
-            className="h-20 w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
+            className="h-28 w-full text-sm  text-black border-2 pr-2 pl-8 py-3 border-blue-400 rounded-md"
             value={deskripsiKejadian} onChange={(e) => {setDeskripsiKejadian(e.target.value)}}/>
         </div>
         
@@ -254,7 +285,7 @@ const LaporanSection = () => {
                         <h1 className="text-black text-sm text-center mx-auto">Belum ada bukti. Mohon Upload Bukti Kejadian</h1>
                     </div>
                 }
-                <div className="flex flex-col items-center space-y-2">
+                <div className="flex flex-col items-center space-y-2 w-full">
                     {
                         files.map((data, index)=> {
                             return <FileTile 
@@ -270,7 +301,7 @@ const LaporanSection = () => {
         </div>
 
     </div>
-        <SubmitLaporanElement/>
+        <SubmitLaporanElement onClick={buatLaporan}/>
     </div>
 }
 

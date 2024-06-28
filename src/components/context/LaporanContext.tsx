@@ -3,7 +3,7 @@ import { Laporan } from "@/types";
 
 interface LaporanContextType {
     laporan: Laporan | null;
-    setLaporan: (newLaporan: Laporan) => void;
+    setLaporan: (newLaporan: Laporan | null) => void;
 }
 
 export const LaporanContext = createContext<LaporanContextType | undefined>(undefined);
@@ -23,7 +23,7 @@ const LaporanProvider = ({ children }: { children: ReactNode }) => {
         loadLaporanFromCache();
     }, []);
 
-    const setLaporan = async (newLaporan: Laporan) => {
+    const setLaporan = async (newLaporan: Laporan | null) => {
         setLaporanState(newLaporan);
         const cache = await caches.open('laporanCache');
         const data = JSON.stringify(newLaporan);

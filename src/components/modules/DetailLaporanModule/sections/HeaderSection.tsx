@@ -7,7 +7,7 @@ const HeaderSection = ()=> {
     const navigateBack = ()=> {
         router.back()
     }
-    return <div className="flex  w-full  text-black overflow-x-hidden ">
+    return <div className="flex  w-full fixed top-0 left-0 z-20 bg-[#EBF8FE] p-4  text-black overflow-x-hidden ">
         <div className="flex w-8">
         <FaArrowLeft onClick={navigateBack} className="my-auto"/>
         </div>

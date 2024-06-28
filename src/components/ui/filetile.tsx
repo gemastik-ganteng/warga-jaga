@@ -1,11 +1,7 @@
-import { Button } from '@/components/ui/button';
-import React from 'react'; // Import ikon-ikon yang digunakan
-
+import React from 'react';
 type FileTileProps = {
     file: File;
-    onDelete: () => void;
 }
-
 const getFileIcon = (fileType: string): JSX.Element => {
     switch (fileType) {
         case 'image':

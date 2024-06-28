@@ -1,11 +1,15 @@
 export interface Laporan {
+  _id?: string;
   namaPelapor: string;
   jenisTindakan: string;
+  judul: string;
   waktuKejadian: string;
   tanggalKejadian: string;
   lokasiKejadian: string;
   deskripsiKejadian: string;
-  bukti: Bukti[];
+  bukti?: Bukti[];
+  deskripsi?: string;
+  files?: string[];
 }
 
 export interface Bukti {

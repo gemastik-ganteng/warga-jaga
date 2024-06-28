@@ -16,7 +16,7 @@ const HeroSection = () => {
           <div className="w-full flex flex-col pt-1">
             <Stack>
               <input
-                placeholder="Cari lokasi lain ..."
+                placeholder="Cari Lokasi Lain ..."
                 className="w-full text-black border-2 pr-4 pl-10 py-3 border-blue-400 rounded-md"
               />
               <Image src="./search.svg" className="my-auto ml-4" alt="" width={20} height={20}/>

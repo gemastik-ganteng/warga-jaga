@@ -3,8 +3,8 @@ import { usePathname } from "next/navigation"
 
 const Navbar = () => {
     const pathname = usePathname()
-    return <div className="w-full flex items-center min-h-16  px-4 fixed bottom-3 left-0">
-        <div className="w-full max-w-5xl mx-auto flex h-full rounded-lg p-4 bg-[#99AEE4] justify-around shadow-md">
+    return <div className="w-full flex items-center min-h-16  px-4 fixed bottom-3 left-0 z-50">
+        <div className="w-full max-w-xl mx-auto flex h-full rounded-lg p-4 bg-[#99AEE4] justify-around shadow-md">
 
         <a href="/"><svg width="31" height="29" viewBox="0 0 31 29" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1.28125 15L14.3399 1.94134C14.9806 1.30064 16.0194 1.30064 16.6601 1.94134L29.7188 15M4.5625 11.7187V26.4844C4.5625 27.3905 5.29703 28.125 6.20312 28.125H12.2188V21.0156C12.2188 20.1095 12.9533 19.375 13.8594 19.375H17.1406C18.0467 19.375 18.7812 20.1095 18.7812 21.0156V28.125H24.7969C25.703 28.125 26.4375 27.3905 26.4375 26.4844V11.7187M10.0312 28.125H22.0625" stroke={pathname === '/'? "#2653C7" : "#FFFFFF"} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
